@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KKEMS.Business\KKEMS.Business.csproj" />
     <ProjectReference Include="..\KKEMS.Core\KKEMS.Core.csproj" />
     <ProjectReference Include="..\KKEMS.Data\KKEMS.Data.csproj" />
   </ItemGroup>

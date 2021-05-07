@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Inventory.Core.Interfaces.Services
+namespace KKEMS.Core.Interfaces.Services
 {
     public interface IExpenseService
     {

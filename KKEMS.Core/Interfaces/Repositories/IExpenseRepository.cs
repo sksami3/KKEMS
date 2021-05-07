@@ -7,7 +7,6 @@ namespace KKEMS.Core.Interfaces.Repositories
 {
     public interface IExpenseRepository : IBaseRepository<Expense>
     {
-        Task Insert(Expense model);
-        Task Remove(int ExpenseId);
+        Task Remove(int expenseId);
     }
 }

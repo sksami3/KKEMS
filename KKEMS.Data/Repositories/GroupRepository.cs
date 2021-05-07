@@ -7,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 
 
-namespace Inventory.Data.Repositories
+namespace KKEMS.Data.Repositories
 {
     public class GroupRepository : BaseRepository<Group>, IGroupRepository
     {

@@ -1,8 +1,9 @@
-﻿using Inventory.Business.Repositories.Base;
-using Inventory.Core.Entity;
-using Inventory.Core.Exception;
-using Inventory.Core.Interfaces.Repositories;
-using Inventory.Data.InventoryContext;
+﻿using KKEMS.Business.Repositories.Base;
+using KKEMS.Core.Entity;
+using KKEMS.Core.Entity.Auth;
+using KKEMS.Core.Exception;
+using KKEMS.Core.Interfaces.Repositories;
+using KKEMS.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventory.Data.Repositories
+namespace KKEMS.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private InventoryDbContext _context;
+        private KKEMSDbContext _context;
         private DbSet<User> entities;
-        public UserRepository(InventoryDbContext context)
+        public UserRepository(KKEMSDbContext context)
             : base()
         {
             _context = context;

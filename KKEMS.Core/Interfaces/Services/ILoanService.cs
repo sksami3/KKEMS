@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using KKEMS.Core.Entity;
 
-namespace Inventory.Core.Interfaces.Services
+namespace KKEMS.Core.Interfaces.Services
 {
     public interface ILoanService
     {

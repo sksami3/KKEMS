@@ -1,6 +1,7 @@
-﻿using Inventory.Core.Interfaces.Services;
+﻿using KKEMS.Core.Interfaces.Services;
 using KKEMS.Core.Entity;
 using KKEMS.Core.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

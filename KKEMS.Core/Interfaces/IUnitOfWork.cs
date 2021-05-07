@@ -1,6 +1,6 @@
 ﻿
 
-namespace Inventory.Core.Interfaces
+namespace KKEMS.Core.Interfaces
 {
     public interface IUnitOfWork
     {

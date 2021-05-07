@@ -1,12 +1,11 @@
-﻿using Inventory.Business.Repositories.Base;
-using Inventory.Core.Entity;
-using Inventory.Core.Interfaces.Repositories;
-using Inventory.Data.InventoryContext;
+﻿using KKEMS.Business.Repositories.Base;
+using KKEMS.Core.Entity;
+using KKEMS.Core.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Inventory.Data.Repositories
+namespace KKEMS.Data.Repositories
 {
     public class RoleRepository : IRoleRepository
     {

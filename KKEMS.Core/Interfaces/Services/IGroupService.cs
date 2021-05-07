@@ -1,9 +1,9 @@
-﻿using System;
+﻿using KKEMS.Core.Entity;
+using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Inventory.Core.Interfaces.Services
+namespace KKEMS.Core.Interfaces.Services
 {
     public interface IGroupService
     {
