@@ -1,0 +1,12 @@
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\bin\Debug\net6.0\KKEMS.Business.deps.json
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\bin\Debug\net6.0\KKEMS.Business.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\bin\Debug\net6.0\ref\KKEMS.Business.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\bin\Debug\net6.0\KKEMS.Business.pdb
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.csprojAssemblyReference.cache
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.GeneratedMSBuildEditorConfig.editorconfig
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.AssemblyInfoInputs.cache
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.AssemblyInfo.cs
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.csproj.CoreCompileInputs.cache
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\ref\KKEMS.Business.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Business\obj\Debug\net6.0\KKEMS.Business.pdb

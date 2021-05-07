@@ -1,0 +1,11 @@
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\bin\Debug\net6.0\KKEMS.Core.deps.json
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\bin\Debug\net6.0\KKEMS.Core.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\bin\Debug\net6.0\ref\KKEMS.Core.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\bin\Debug\net6.0\KKEMS.Core.pdb
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\KKEMS.Core.GeneratedMSBuildEditorConfig.editorconfig
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\KKEMS.Core.AssemblyInfoInputs.cache
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\KKEMS.Core.AssemblyInfo.cs
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\KKEMS.Core.csproj.CoreCompileInputs.cache
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\KKEMS.Core.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\ref\KKEMS.Core.dll
+F:\KithAndKinExpenseManagementSystem\KKEMS\KKEMS.Core\obj\Debug\net6.0\KKEMS.Core.pdb
