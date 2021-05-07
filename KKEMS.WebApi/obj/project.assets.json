@@ -921,6 +921,20 @@
           }
         }
       },
+      "KKEMS.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "KKEMS.Core": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.0-preview.3.21201.13"
+        },
+        "compile": {
+          "bin/placeholder/KKEMS.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/KKEMS.Business.dll": {}
+        }
+      },
       "KKEMS.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2770,6 +2784,11 @@
         "version.txt"
       ]
     },
+    "KKEMS.Business/1.0.0": {
+      "type": "project",
+      "path": "../KKEMS.Business/KKEMS.Business.csproj",
+      "msbuildProject": "../KKEMS.Business/KKEMS.Business.csproj"
+    },
     "KKEMS.Core/1.0.0": {
       "type": "project",
       "path": "../KKEMS.Core/KKEMS.Core.csproj",
@@ -2784,6 +2803,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "IdentityServer4 >= 4.1.2",
+      "KKEMS.Business >= 1.0.0",
       "KKEMS.Core >= 1.0.0",
       "KKEMS.Data >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.0-preview.3.21201.13",
@@ -2820,6 +2840,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "F:\\KithAndKinExpenseManagementSystem\\KKEMS\\KKEMS.Business\\KKEMS.Business.csproj": {
+              "projectPath": "F:\\KithAndKinExpenseManagementSystem\\KKEMS\\KKEMS.Business\\KKEMS.Business.csproj"
+            },
             "F:\\KithAndKinExpenseManagementSystem\\KKEMS\\KKEMS.Core\\KKEMS.Core.csproj": {
               "projectPath": "F:\\KithAndKinExpenseManagementSystem\\KKEMS\\KKEMS.Core\\KKEMS.Core.csproj"
             },
