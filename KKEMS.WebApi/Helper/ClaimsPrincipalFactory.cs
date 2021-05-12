@@ -32,7 +32,7 @@ public sealed class ClaimsPrincipalFactory : UserClaimsPrincipalFactory<User, Ro
 
             return identity;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return null;
         }

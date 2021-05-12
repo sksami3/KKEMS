@@ -42,6 +42,7 @@ namespace KKEMS.Business.Services
         public async Task Update(Expense expense)
         {
             //await _expenseRepository.Update(expense);
+            new NotImplementedException();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace KKEMS.WebApi.Helper
                 email.Subject = "Test Email Subject";
                 email.Body = new TextPart(TextFormat.Html) { Text = body };
 
-                // send email
+                //send email
                 //using var smtp = new SmtpClient();
                 //smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
                 //smtp.Authenticate("rakibchowdhury01942@gmail.com", "shusil00");
@@ -43,9 +43,9 @@ namespace KKEMS.WebApi.Helper
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                return false;
             }
 
         }

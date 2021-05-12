@@ -48,9 +48,9 @@ namespace KKEMS.WebApi.Helper
                 user.token = tokenHandler.WriteToken(jwt);
                 return user;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                return null;
             }
 
         }
