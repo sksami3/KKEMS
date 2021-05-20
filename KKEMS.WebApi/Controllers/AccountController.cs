@@ -79,7 +79,7 @@ namespace KKEMS.Web.Controllers
             if (userVM != null)
             {
                 #region with token generation
-                var result = await SignInManager.PasswordSignInAsync(userVM.UserName, userVM.PasswordHash, true, false);
+                var result = SignInManager.PasswordSignInAsync(userVM.UserName, userVM.PasswordHash, true, false).Result;
                 if (result.Succeeded)
                 {
                     var user = await UserManager.FindByNameAsync(userVM.UserName);

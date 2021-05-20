@@ -1,6 +1,7 @@
 using IdentityServer4.Stores;
 using KKEMS.Core.Entity.Auth;
 using KKEMS.Data.DbContext;
+using KKEMS.Web;
 using KKEMS.WebApi.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -53,7 +54,7 @@ namespace KKEMS.WebApi
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddEntityFrameworkStores<KKEMSDbContext>()
                 .AddDefaultTokenProviders();
@@ -118,6 +119,8 @@ namespace KKEMS.WebApi
                 });
             });
             IdentityModelEventSource.ShowPII = true;
+            services.Resolve();
+            //services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
