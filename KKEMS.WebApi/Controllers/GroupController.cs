@@ -32,7 +32,7 @@ namespace KKEMS.WebApi.Controllers
             return Ok(await _groupService.GetGroupById(id));
         }
         [HttpPost("Add")]
-        public async Task<IActionResult> CreateGroup([FromForm] Group group)
+        public async Task<IActionResult> CreateGroup(/*[FromForm]*/ Group group)
         {
             /*string filename = Helper.Helper.UploadSingleImage(Helper.Enums.FolderNameEnums.GroupImages.ToString(), group.ImageFile);
             if (string.IsNullOrEmpty(filename))
@@ -47,7 +47,7 @@ namespace KKEMS.WebApi.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> EditGroup([FromForm] Group group)
+        public async Task<IActionResult> EditGroup(/*[FromForm]*/ Group group)
         {
             /*if (group.ImageFile != null)
             {

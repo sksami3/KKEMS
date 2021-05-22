@@ -32,7 +32,7 @@ namespace KKEMS.WebApi.Controllers
             return Ok(await _relationshipService.GetRelationshipById(id));
         }
         [HttpPost("Add")]
-        public async Task<IActionResult> CreateRelationship([FromForm] Relationship relationship)
+        public async Task<IActionResult> CreateRelationship(/*[FromForm]*/ Relationship relationship)
         {
             /*string filename = Helper.Helper.UploadSingleImage(Helper.Enums.FolderNameEnums.RelationshipImages.ToString(), relationship.ImageFile);
             if (string.IsNullOrEmpty(filename))
@@ -47,7 +47,7 @@ namespace KKEMS.WebApi.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> EditRelationship([FromForm] Relationship relationship)
+        public async Task<IActionResult> EditRelationship(/*[FromForm]*/ Relationship relationship)
         {
             /*if (relationship.ImageFile != null)
             {

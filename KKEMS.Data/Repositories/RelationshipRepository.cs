@@ -25,7 +25,7 @@ namespace KKEMS.Data.Repositories
             relationship.Name = model.Name;
             relationship.KithOrKins = model.KithOrKins;
             relationship.Group = model.Group;
-            relationship.User = model.User;
+            //relationship.User = model.User;
 
             Update(relationship);
             await SaveChangesAsync();

@@ -14,6 +14,7 @@ namespace KKEMS.Core.Entity
     {
         public double Cost { get; set; }
         public string Reason { get; set; }
+        public DateTime ExpenseDate { get; set; }
         #region Foreign Fields
         [DisplayName("User")]
         [ForeignKey("User")]

@@ -4,14 +4,16 @@ using KKEMS.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KKEMS.Data.Migrations
 {
     [DbContext(typeof(KKEMSDbContext))]
-    partial class KKEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210522081806_2021_05_22_Alter_Relationship")]
+    partial class _2021_05_22_Alter_Relationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,9 +146,6 @@ namespace KKEMS.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpenseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("GroupId")

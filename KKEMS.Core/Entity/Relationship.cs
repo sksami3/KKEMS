@@ -15,10 +15,10 @@ namespace KKEMS.Core.Entity
     {
         public string Name { get; set; }
         #region Foreign Fields
-        [DisplayName("User")]
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        //[DisplayName("User")]
+        //[ForeignKey("User")]
+        //public int UserId { get; set; }
+        //public User User { get; set; }
 
         public ICollection<User> KithOrKins { get; set; }
 

@@ -32,7 +32,7 @@ namespace KKEMS.WebApi.Controllers
             return Ok(await _expenseService.GetExpenseById(id));
         }
         [HttpPost("Add")]
-        public async Task<IActionResult> CreateExpense([FromForm] Expense expense)
+        public async Task<IActionResult> CreateExpense(/*[FromForm]*/ Expense expense)
         {
             /*string filename = Helper.Helper.UploadSingleImage(Helper.Enums.FolderNameEnums.ExpenseImages.ToString(), expense.ImageFile);
             if (string.IsNullOrEmpty(filename))
@@ -47,7 +47,7 @@ namespace KKEMS.WebApi.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> EditExpense([FromForm] Expense expense)
+        public async Task<IActionResult> EditExpense(/*[FromForm]*/ Expense expense)
         {
             /*if (expense.ImageFile != null)
             {
