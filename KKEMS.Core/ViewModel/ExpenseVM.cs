@@ -1,4 +1,5 @@
-﻿using KKEMS.Core.Entity.Auth;
+﻿using KKEMS.Core.Entity;
+using KKEMS.Core.Entity.Auth;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,6 @@ namespace KKEMS.Core.ViewModel
         public User KithOrKin { get; set; }
 
         [DisplayName("Group")]
-        [ForeignKey("Group")]
         public Nullable<int> GroupId { get; set; }
         public Group Group { get; set; }
         #endregion
