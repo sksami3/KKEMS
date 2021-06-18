@@ -8,5 +8,6 @@ namespace KKEMS.Core.Interfaces.Repositories
     public interface IExpenseRepository : IBaseRepository<Expense>
     {
         Task Remove(int expenseId);
+        Task UpdateExpense(Expense model);
     }
 }
