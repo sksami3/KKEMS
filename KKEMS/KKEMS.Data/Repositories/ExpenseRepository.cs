@@ -41,7 +41,8 @@ namespace KKEMS.Data.Repositories
 
             expense.User = model.User;
             expense.Reason = model.Reason;
-            expense.KithOrKin = model.KithOrKin;
+            expense.KithOrKinId = model.KithOrKinId;
+            expense.GroupId = model.GroupId;
             expense.Cost = model.Cost;
             expense.Reason = model.Reason;
 
