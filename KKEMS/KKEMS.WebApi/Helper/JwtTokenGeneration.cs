@@ -43,7 +43,7 @@ namespace KKEMS.WebApi.Helper
                     audience: null,//_jwtOptions.Audience,
                     claims: claimsIdentity.Claims,
                     notBefore: DateTime.UtcNow,
-                    expires: DateTime.UtcNow.AddDays(7),
+                    expires: DateTime.UtcNow.AddDays(30),
                     signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256));
                 user.token = tokenHandler.WriteToken(jwt);
                 return user;
