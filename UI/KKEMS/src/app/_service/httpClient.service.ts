@@ -9,15 +9,14 @@ import { Observable, throwError } from 'rxjs';
 @Injectable()
 export class HttpClientService {
 
-  constructor(private httpClient: HttpClient, private toast:Toastr) { }
+  constructor(private httpClient: HttpClient/*, private toast:Toastr*/) { }
 
   postAsync(api: string, body: any) {
     return this.httpClient.post(api, body, this.getToken())
     .pipe(map((data: any) => {
-        console.log(data);
         if (data.result){
           if (data.message){
-            this.toast.Success(data.message);
+            //this.toast.Success(data.message);
           }
           return data.result;
         }
@@ -73,16 +72,16 @@ export class HttpClientService {
       // }
       if (code === 500){
         if (error.error.Message){
-          this.toast.Error(error.error.Message);
+          //this.toast.Error(error.error.Message);
         }
         console.log(error.error.Message);
       }
       if (code === 400){
         if (error.error.Message){
-          this.toast.Error(error.error.Message);
+          //this.toast.Error(error.error.Message);
         }
         if(error.error.title){
-          this.toast.Error(error.error.title);
+          //this.toast.Error(error.error.title);
         }
           console.log(error.error.Error);
           //this.alertify.error(error.error.Error);

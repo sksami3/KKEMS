@@ -30,9 +30,9 @@
         <mat-form-field required appearance="outline">
             <mat-label> Password
             </mat-label>
-            <input matInput formControlName="password" type="password">
-            <mat-error *ngIf="registrationForm.controls.password.touched && registrationForm.controls.password.invalid">
-                <span *ngIf="registrationForm.controls.password.errors?.required">This field is mandatory.</span>
+            <input matInput formControlName="passwordhash" type="password">
+            <mat-error *ngIf="registrationForm.controls.passwordhash.touched && registrationForm.controls.passwordhash.invalid">
+                <span *ngIf="registrationForm.controls.passwordhash.errors?.required">This field is mandatory.</span>
             </mat-error>
         </mat-form-field>
 

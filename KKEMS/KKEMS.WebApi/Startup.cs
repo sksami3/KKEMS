@@ -132,8 +132,12 @@ namespace KKEMS.WebApi
             //    app.UseSwagger();
             //    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KKEMS.WebApi v1"));
             //}
+            // Use the CORS policy
+            app.UseCors("myPolicy");
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
@@ -152,9 +156,6 @@ namespace KKEMS.WebApi
             app.UseRouting();
 
             app.UseIdentityServer();
-
-            // Use the CORS policy
-            app.UseCors("myPolicy");
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         }

@@ -8,6 +8,8 @@ import { UserModule } from './user/user.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.route';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientService } from './_service/httpClient.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { AuthModule } from './auth/auth.module';
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     UserModule,
-    AuthModule
+    AuthModule,
+    HttpClientModule
   ],
   providers: [],
   schemas: [

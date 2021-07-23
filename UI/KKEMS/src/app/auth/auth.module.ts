@@ -17,6 +17,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientService } from '../_service/httpClient.service';
+import { Toastr } from '../_service/toastr.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import {MatDividerModule} from '@angular/material/divider';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule,
     MatToolbarModule,
     MatIconModule,
@@ -41,6 +45,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatInputModule,
     MatCardModule,
     MatDividerModule
-  ]
+  ],
+  providers: [HttpClientService, Toastr]
 })
 export class AuthModule { }
