@@ -12,8 +12,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthComponent } from './auth.component';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,12 @@ import { AuthComponent } from './auth.component';
     MatButtonModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDividerModule
   ]
 })
 export class AuthModule { }

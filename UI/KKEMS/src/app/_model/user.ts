@@ -5,4 +5,5 @@ export class User
     PASSWORDHASH: string;
     TOKEN: string;
     ID: number;
+    PhoneNumber: string;
 }
