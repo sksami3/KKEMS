@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { UserComponent } from './user.component';
 import { RouterModule } from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,11 +9,17 @@ import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthComponent } from './auth.component';
+
+
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    UserComponent
+    LoginComponent,
+    RegisterComponent,
+    AuthComponent
   ],
   imports: [
     CommonModule,
@@ -31,4 +35,4 @@ import {MatMenuModule} from '@angular/material/menu';
     MatMenuModule
   ]
 })
-export class UserModule { }
+export class AuthModule { }
