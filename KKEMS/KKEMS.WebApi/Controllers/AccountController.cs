@@ -86,8 +86,9 @@ namespace KKEMS.Web.Controllers
                     var roles = await UserManager.GetRolesAsync(user);
                     var claims = await UserManager.GetClaimsAsync(user);
                     string token = JwtTokenGeneration.GenerateToken(user, roles, claims).token;
+                    user.token = token;
 
-                    return Ok(token);
+                    return Ok(user);
                 }
                 #endregion
                 else
