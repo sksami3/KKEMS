@@ -10,8 +10,12 @@ export class ApiConst {
     //  static updateProduct = ApiConst.BASE_URL + '/api/Product/Update';
     //  static deleteProduct = ApiConst.BASE_URL + '/api/Product/Delete/';
      
+     static baseUrl = ApiConst.BASE_URL;
      static getAccount = ApiConst.BASE_URL + '/api/Account/GetAllUsers';
      static postUser = ApiConst.BASE_URL + '/api/Account/Register';
      static postConfirmEmail = ApiConst.BASE_URL + '/api/Account/ConfirmEmail';
      static authenticate = ApiConst.BASE_URL + '/api/Account/Authenticate';
+
+     static postGroup = ApiConst.BASE_URL + '/api/Group/Add';
+
 }

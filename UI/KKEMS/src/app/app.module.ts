@@ -8,8 +8,11 @@ import { UserModule } from './user/user.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.route';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientService } from './_service/httpClient.service';
+import { AuthenticationService } from './_service/authentication.service';
+import { JwtInterceptor } from './_helper/jwt.interceptor';
+import { ErrorInterceptor } from './_helper/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { HttpClientService } from './_service/httpClient.service';
     AuthModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA

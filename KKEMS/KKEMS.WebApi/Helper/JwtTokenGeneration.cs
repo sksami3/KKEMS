@@ -13,7 +13,7 @@ namespace KKEMS.WebApi.Helper
 {
     public static class JwtTokenGeneration
     {
-        public static User GenerateToken(User user, IList<string> roles = null, IList<Claim> claims=null)
+        public static User GenerateToken(User user, IList<string> roles = null, IList<Claim> claims = null)
         {
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -27,7 +27,7 @@ namespace KKEMS.WebApi.Helper
                 {
                             new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                            new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                            new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString())
                             //new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(dateTime).ToString(), ClaimValueTypes.Integer64)
                         };
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/_model/user';
+import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
 
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
+    private httpAuthService: AuthenticationService,
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
 
       this.user = this.loginForm.value;
-      console.log(this.user);
       //update
       if (this.user.ID !== undefined || (typeof this.user.ID === "string" && this.user.ID !== "")) {
 
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
       }
       //insert
       else {
-        this.httpService.postAsync(ApiConst.authenticate, this.user).subscribe(data => {
+        console.log(this.user);
+        this.httpAuthService.login(this.loginForm.get('username')?.value, this.loginForm.get('passwordhash')?.value).subscribe(data => {
           // this.router.navigate(["/product-list"]);
           console.log('saved');
         })

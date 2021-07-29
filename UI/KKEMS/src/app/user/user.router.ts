@@ -2,6 +2,8 @@ import { Route } from '@angular/router';
 import { AuthComponent } from '../auth/auth.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { GroupListComponent } from './group-list/group-list.component';
+import { GroupComponent } from './group/group.component';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user.component';
 
@@ -11,8 +13,10 @@ export const UserRoutes: Route[] = [
         component: UserComponent,
         // canActivate : [AuthGuard],
         children: [
-            { path: 'header', component: HeaderComponent }
-            // { path: 'product', component: ProductComponent, data: { roles: ['Admin'] } },
+            { path: 'header', component: HeaderComponent },
+            { path: 'group-list', component: GroupListComponent, data: { roles: ['Admin'] } },
+            { path: 'group', component: GroupComponent, data: { roles: ['Admin'] } },
+            { path: 'group/:id', component: GroupComponent, data: { roles: ['Admin'] } }
         ]
     },
     {

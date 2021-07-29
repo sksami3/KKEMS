@@ -1,0 +1,25 @@
+<div class="example-button-container">
+    <button mat-fab color="accent" [disabled]="!groupForm.valid" aria-label="save" (click)="submit()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+
+
+<div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
+
+    <form [formGroup]="groupForm" fxLayout="column">
+        <div>
+            <mat-form-field required appearance="outline">
+                <mat-label> Group
+                </mat-label>
+                <input matInput formControlName="groupName" type="groupName">
+                <mat-error *ngIf="groupForm.controls.groupName.touched && groupForm.controls.groupName.invalid">
+                    <span *ngIf="groupForm.controls.groupName.errors?.required">This field is mandatory.</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- <button [disabled]="!groupForm.valid" mat-raised-button color="primary" (click)="submit()">Login</button> -->
+    </form>
+
+</div>

@@ -17,9 +17,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientService } from '../_service/httpClient.service';
 import { Toastr } from '../_service/toastr.service';
+import { AuthenticationService } from '../_service/authentication.service';
+import { JwtInterceptor } from '../_helper/jwt.interceptor';
+import { ErrorInterceptor } from '../_helper/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,8 @@ import { Toastr } from '../_service/toastr.service';
     MatCardModule,
     MatDividerModule
   ],
-  providers: [HttpClientService, Toastr]
+  providers: [HttpClientService, AuthenticationService, Toastr,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },]
 })
 export class AuthModule { }
