@@ -18,9 +18,10 @@ export class JwtInterceptor implements HttpInterceptor {
         // console.log("is lolla logged:");
         console.log("is lolla apiUser:"+ isApiUrl);
         if (isApiUrl && user != null) {
+            console.log(user.token);
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${user.TOKEN}`
+                    Authorization: `Bearer ${user.token}`
                 }
             });
         }

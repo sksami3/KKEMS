@@ -23,6 +23,7 @@ import { Toastr } from '../_service/toastr.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../_helper/jwt.interceptor';
 import { ErrorInterceptor } from '../_helper/error.interceptor';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ErrorInterceptor } from '../_helper/error.interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

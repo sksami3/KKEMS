@@ -120,7 +120,7 @@ namespace KKEMS.WebApi
             });
             IdentityModelEventSource.ShowPII = true;
             services.Resolve();
-            //services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

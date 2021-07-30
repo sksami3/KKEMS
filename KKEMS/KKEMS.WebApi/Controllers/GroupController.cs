@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace KKEMS.WebApi.Controllers
 {
@@ -25,8 +26,12 @@ namespace KKEMS.WebApi.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllGroups()
         {
-            var group = await _groupService.GetGroups();
-            return Ok(group);
+            int userId = 0;
+            if (User != null)
+                userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+
+            var groups = await _groupService.GetGroups(userId);
+            return Ok(groups);
         }
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetGroupById(int id)
@@ -44,6 +49,12 @@ namespace KKEMS.WebApi.Controllers
             else
                 group.Image = filename;*/
 
+            if (User != null)
+            {
+                int userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+                group.UserId = userId;
+            }
+                
             await _groupService.Add(group);
             return Ok(group);
         }
@@ -59,6 +70,9 @@ namespace KKEMS.WebApi.Controllers
                 else
                     group.Image = filename;
             }*/
+            int userId = 0;
+            if (User != null)
+                userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
 
             await _groupService.Update(group);
             return Ok(group);

@@ -8,7 +8,7 @@ namespace KKEMS.Core.Interfaces.Services
     public interface IGroupService
     {
         Task Add(Group group);
-        Task<IEnumerable<Group>> GetGroups();
+        Task<IEnumerable<Group>> GetGroups(int userId);
         Task Update(Group group);
         Task Remove(int groupId);
         Task<Group> GetGroupById(int id);

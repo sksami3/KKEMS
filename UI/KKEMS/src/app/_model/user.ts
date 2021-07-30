@@ -6,7 +6,7 @@ export class User
     EMAIL: string;
     PASSWORDHASH: string;
     role: Role;
-    TOKEN?: string;
+    token: string;
     ID: number;
     PhoneNumber: string;
 }

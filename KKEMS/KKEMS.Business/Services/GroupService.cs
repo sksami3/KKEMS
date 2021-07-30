@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace KKEMS.Business.Services
 {
@@ -28,9 +29,9 @@ namespace KKEMS.Business.Services
             return await _groupRepository.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Group>> GetGroups()
+        public async Task<IEnumerable<Group>> GetGroups(int userId)
         {
-            return await _groupRepository.All().ToListAsync();
+            return await _groupRepository.All().Where(x => x.UserId == userId).ToListAsync();
         }
 
         public async Task Remove(int groupId)
