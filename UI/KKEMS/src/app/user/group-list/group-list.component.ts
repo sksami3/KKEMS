@@ -16,7 +16,7 @@ export interface GroupElement {
 export class GroupListComponent implements OnInit {
 
   groups=[];
-  displayedColumns: string[] = ['position', 'name', 'createDate'];
+  displayedColumns: string[] = ['position', 'name', 'createDate', 'Action'];
   dataSource = this.groups;
   clickedRows = new Set<GroupElement>();
 
