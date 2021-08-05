@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/_model';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
+import {UUID} from 'uuid-generator-ts';
 
 @Component({
   selector: 'app-kithorkin',
@@ -24,16 +25,19 @@ export class KithorkinComponent implements OnInit {
   ngOnInit() {
     this.kinOrkithForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
-      username: [null, [Validators.required]],
-      passwordhash: [null, [Validators.required, Validators.minLength(6)]],
+      name: [null, [Validators.required]],
       phonenumber: [null, [Validators.nullValidator]]
     });
   }
 
   submit() {
     if (this.kinOrkithForm.valid) {
+      const uuid = new UUID();
 
       this.user = this.kinOrkithForm.value;
+      this.user.PASSWORDHASH = 'kithOrkin123';
+      this.user.USERNAME = uuid.getDashFreeUUID().substring(0, 6);
+      this.user.isUsedForKinOrKith = true;
       console.log(this.user);
       //update
       if (this.user.ID !== undefined || (typeof this.user.ID === "string" && this.user.ID !== "")) {

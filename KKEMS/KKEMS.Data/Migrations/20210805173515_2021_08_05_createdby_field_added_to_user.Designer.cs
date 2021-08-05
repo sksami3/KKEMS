@@ -4,14 +4,16 @@ using KKEMS.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KKEMS.Data.Migrations
 {
     [DbContext(typeof(KKEMSDbContext))]
-    partial class KKEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210805173515_2021_08_05_createdby_field_added_to_user")]
+    partial class _2021_08_05_createdby_field_added_to_user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

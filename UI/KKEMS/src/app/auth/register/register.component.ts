@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.valid) {
 
       this.user = this.registrationForm.value;
+      this.user.isUsedForKinOrKith = false;
       console.log(this.user);
       //update
       if (this.user.ID !== undefined || (typeof this.user.ID === "string" && this.user.ID !== "")) {

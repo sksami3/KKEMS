@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace KKEMS.Web.Controllers
@@ -41,6 +42,9 @@ namespace KKEMS.Web.Controllers
         {
             if (registerVM != null)
             {
+                if(registerVM.isUsedForKinOrKith)
+                    registerVM.CreatedByUserId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+
                 var result = await UserManager.CreateAsync(registerVM, registerVM.PasswordHash);
                 #region Mail Confirmation
                 //if (result.Succeeded)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,10 @@ namespace KKEMS.Core.Entity.Auth
     {
         public string token { get; set; }
         public string name { get; set; }
+        [Required]
+        public int CreatedByUserId { get; set; }
+        [Required]
+        public bool isUsedForKinOrKith { get; set; }
         [NotMapped]
         public ICollection<Group> Groups { get; set; }
         [NotMapped]

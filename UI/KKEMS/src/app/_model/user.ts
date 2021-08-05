@@ -9,4 +9,5 @@ export class User
     token: string;
     ID: number;
     PhoneNumber: string;
+    isUsedForKinOrKith: boolean;
 }
