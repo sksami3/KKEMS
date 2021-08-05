@@ -5,6 +5,8 @@ import { RegisterComponent } from '../auth/register/register.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupComponent } from './group/group.component';
 import { HeaderComponent } from './header/header.component';
+import { KithorkinListComponent } from './kithorkin-list/kithorkin-list.component';
+import { KithorkinComponent } from './kithorkin/kithorkin.component';
 import { UserComponent } from './user.component';
 
 export const UserRoutes: Route[] = [
@@ -16,7 +18,10 @@ export const UserRoutes: Route[] = [
             { path: 'header', component: HeaderComponent },
             { path: 'group-list', component: GroupListComponent, data: { roles: ['Admin'] } },
             { path: 'group', component: GroupComponent, data: { roles: ['Admin'] } },
-            { path: 'group/:id', component: GroupComponent, data: { roles: ['Admin'] } }
+            { path: 'group/:id', component: GroupComponent, data: { roles: ['Admin'] } },
+            { path: 'kithorkin', component: KithorkinComponent, data: { roles: ['Admin'] } },
+            { path: 'kithorkin/:id', component: KithorkinComponent, data: { roles: ['Admin'] } },
+            { path: 'kithorkin-list', component: KithorkinListComponent, data: { roles: ['Admin'] } }
         ]
     },
     {

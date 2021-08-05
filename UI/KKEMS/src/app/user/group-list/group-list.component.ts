@@ -40,6 +40,11 @@ export class GroupListComponent implements OnInit {
     })
     
   }
+  
+  edit(e : any) {
+    e.stopPropagation();
+    console.log(e);
+  }
   ngOnInit() {
   }
 

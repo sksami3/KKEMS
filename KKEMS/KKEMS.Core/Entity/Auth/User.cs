@@ -11,6 +11,7 @@ namespace KKEMS.Core.Entity.Auth
     public class User : IdentityUser<int>
     {
         public string token { get; set; }
+        public string name { get; set; }
         [NotMapped]
         public ICollection<Group> Groups { get; set; }
         [NotMapped]

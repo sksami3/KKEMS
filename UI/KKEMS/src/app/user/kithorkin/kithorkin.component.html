@@ -1,0 +1,48 @@
+<form fxLayout="column" [formGroup]="kinOrkithForm">
+    <div class="input-row" fxLayout="column" fxLayoutGap.lt-md="0px" fxLayoutAlign="space-around center">
+
+        <mat-card-header>
+            <mat-card-title>Register</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider style="width: 60%; display: inline-block;"></mat-divider>
+        <span style="padding: 20px; font-weight: 500;"></span>
+
+        <mat-form-field appearance="outline">
+            <mat-label> E-mail
+            </mat-label>
+            <input matInput formControlName="email" required appearance="outline">
+            <mat-error *ngIf="kinOrkithForm.controls.email.touched && kinOrkithForm.controls.email.invalid">
+                <span *ngIf="kinOrkithForm.controls.email.errors?.required">This field is mandatory.</span>
+                <span *ngIf="kinOrkithForm.controls.email.errors?.pattern">This field is invalid.</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field required appearance="outline">
+            <mat-label> Username
+            </mat-label>
+            <input matInput formControlName="username" type="username">
+            <mat-error *ngIf="kinOrkithForm.controls.username.touched && kinOrkithForm.controls.username.invalid">
+                <span *ngIf="kinOrkithForm.controls.username.errors?.required">This field is mandatory.</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field required appearance="outline">
+            <mat-label> Password
+            </mat-label>
+            <input matInput formControlName="passwordhash" type="password">
+            <mat-error *ngIf="kinOrkithForm.controls.passwordhash.touched && kinOrkithForm.controls.passwordhash.invalid">
+                <span *ngIf="kinOrkithForm.controls.passwordhash.errors?.required">This field is mandatory.</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field required appearance="outline">
+            <mat-label> Phonenumber
+            </mat-label>
+            <input matInput formControlName="phonenumber" type="phonenumber">
+        </mat-form-field>
+
+        <button [disabled]="!kinOrkithForm.valid" mat-raised-button color="primary"
+            (click)="submit()">Register</button>
+    </div>
+</form>

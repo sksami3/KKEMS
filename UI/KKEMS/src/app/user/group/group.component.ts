@@ -14,6 +14,7 @@ export class GroupComponent implements OnInit {
 
   groupForm: FormGroup;
   group: Group;
+  isEdit: boolean;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +34,7 @@ export class GroupComponent implements OnInit {
       this.group.NAME = this.groupForm.get('groupName')?.value;
       //update
       if (this.group.ID !== undefined || (typeof this.group.ID === "string" && this.group.ID !== "")) {
-
+        this.isEdit = true;
         // this.httpService.postAsync(ApiConst.postUser, this.groupForm.value).subscribe(data => {
         //   // this.router.navigate(["/product-list"]);
 

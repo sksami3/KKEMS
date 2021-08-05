@@ -24,13 +24,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../_helper/jwt.interceptor';
 import { ErrorInterceptor } from '../_helper/error.interceptor';
 import {MatTableModule} from '@angular/material/table';
+import { KithorkinComponent } from './kithorkin/kithorkin.component';
+import { KithorkinListComponent } from './kithorkin-list/kithorkin-list.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     UserComponent,
     GroupComponent,
-    GroupListComponent
+    GroupListComponent,
+    KithorkinComponent,
+    KithorkinListComponent
   ],
   imports: [
     CommonModule,
