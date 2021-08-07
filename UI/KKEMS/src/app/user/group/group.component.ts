@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/_model/group';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
+import { KkDialogComponent } from '../kk-dialog/kk-dialog.component';
 
 export interface KKElement {
   name: string;
@@ -24,14 +26,24 @@ export class GroupComponent implements OnInit {
 
   kinOrkiths = [];
   displayedColumns: string[] = ['position', 'name', 'Actions'];
-  dataSource = this.group.KithOrKins;
+  dataSource = this.group.kithOrKins;
   clickedRows = new Set<KKElement>();
 
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
+
+  openDialog() {
+    this.dialog.open(KkDialogComponent, {
+      width: '550px'
+    });
+  }
+  calcel(){
+    this.dialog.closeAll();
+  }
 
   ngOnInit() {
     this.groupForm = this.formBuilder.group({
@@ -51,7 +63,7 @@ export class GroupComponent implements OnInit {
     this.group = new Group();
     if (this.groupForm.valid) {
 
-      this.group.NAME = this.groupForm.get('groupName')?.value;
+      this.group.name = this.groupForm.get('groupName')?.value;
       //update
       if (this.isEdit) {
         // this.httpService.postAsync(ApiConst.postUser, this.groupForm.value).subscribe(data => {
@@ -85,8 +97,9 @@ export class GroupComponent implements OnInit {
     console.log('in getGroupById')
     this.httpService.getAsync(ApiConst.getGroup + id).then(data => {
       this.group = data;
-
-      // this.dataSource = this.group.;
+      console.log(this.group);
+      this.groupForm.controls.groupName.setValue(this.group.name);
+      this.dataSource = this.group.kithOrKins;
     })
   }
 }

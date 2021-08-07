@@ -27,6 +27,10 @@ import {MatTableModule} from '@angular/material/table';
 import { KithorkinComponent } from './kithorkin/kithorkin.component';
 import { KithorkinListComponent } from './kithorkin-list/kithorkin-list.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { KkDialogComponent } from './kk-dialog/kk-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     GroupComponent,
     GroupListComponent,
     KithorkinComponent,
-    KithorkinListComponent
+    KithorkinListComponent,
+    KkDialogComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +69,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatDividerModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

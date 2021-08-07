@@ -3,7 +3,7 @@ import { BaseModel } from "./baseModel";
 
 export class Group extends BaseModel
 {
-    NAME: string;
-    USERID: number;
-    KithOrKins: Array<User>;
+    name: string;
+    userId: number;
+    kithOrKins: Array<User>;
 }
