@@ -26,7 +26,8 @@ namespace KKEMS.Business.Services
 
         public async Task<Group> GetGroupById(int id)
         {
-            return await _groupRepository.FindAsync(id);
+            Group group = await _groupRepository.FindAsync(id);
+            return group;
         }
 
         public async Task<IEnumerable<Group>> GetGroups(int userId)

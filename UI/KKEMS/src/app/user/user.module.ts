@@ -26,6 +26,7 @@ import { ErrorInterceptor } from '../_helper/error.interceptor';
 import {MatTableModule} from '@angular/material/table';
 import { KithorkinComponent } from './kithorkin/kithorkin.component';
 import { KithorkinListComponent } from './kithorkin-list/kithorkin-list.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { KithorkinListComponent } from './kithorkin-list/kithorkin-list.componen
     MatInputModule,
     MatCardModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

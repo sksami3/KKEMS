@@ -15,37 +15,40 @@ export interface GroupElement {
 })
 export class GroupListComponent implements OnInit {
 
-  groups=[];
+  groups = [];
   displayedColumns: string[] = ['position', 'name', 'createDate', 'Action'];
   dataSource = this.groups;
   clickedRows = new Set<GroupElement>();
 
-  constructor(private httpService:HttpClientService,
-    private router:Router,  
-    private route: ActivatedRoute) { 
+  constructor(private httpService: HttpClientService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.getGroups();
   }
-  getGroups(){
+
+  ngOnInit() {
+
+  }
+
+  getGroups() {
     this.httpService.getAsync(ApiConst.getGroups).then(data => {
       this.groups = data;
 
       this.dataSource = this.groups;
     })
-    
+
   }
 
-  deleteGroup(id : string){
-    this.httpService.postAsync(ApiConst.deleteGroup + id,null).subscribe(data => {
+  deleteGroup(id: string) {
+    this.httpService.postAsync(ApiConst.deleteGroup + id, null).subscribe(data => {
       this.getGroups();
     })
-    
+
   }
-  
-  edit(e : any) {
-    e.stopPropagation();
-    console.log(e);
+
+  edit(id: string) {
+    this.router.navigate(['User/group/' + id]);
   }
-  ngOnInit() {
-  }
+
 
 }
