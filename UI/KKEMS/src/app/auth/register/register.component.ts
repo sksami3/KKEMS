@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       this.user.isUsedForKinOrKith = false;
       console.log(this.user);
       //update
-      if (this.user.ID !== undefined || (typeof this.user.ID === "string" && this.user.ID !== "")) {
+      if (this.user.id !== undefined || (typeof this.user.id === "string" && this.user.id !== "")) {
 
         // this.httpService.postAsync(ApiConst.postUser, this.registrationForm.value).subscribe(data => {
         //   // this.router.navigate(["/product-list"]);

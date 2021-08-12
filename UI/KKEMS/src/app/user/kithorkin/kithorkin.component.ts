@@ -40,7 +40,7 @@ export class KithorkinComponent implements OnInit {
       this.user.isUsedForKinOrKith = true;
       console.log(this.user);
       //update
-      if (this.user.ID !== undefined || (typeof this.user.ID === "string" && this.user.ID !== "")) {
+      if (this.user.id !== undefined || (typeof this.user.id === "string" && this.user.id !== "")) {
 
         // this.httpService.postAsync(ApiConst.postUser, this.kinOrkithForm.value).subscribe(data => {
         //   // this.router.navigate(["/product-list"]);

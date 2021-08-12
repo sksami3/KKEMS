@@ -101,5 +101,11 @@ namespace KKEMS.Web.Controllers
             else
                 return StatusCode(404);
         }
+        [HttpGet("GetAllKinOrKithByCreatedUserId/{id}")]
+        public async Task<IActionResult> GetAllKinOrKithByCreatedUserId(int id)
+        {
+            var kinOrKith = UserManager.Users.Where(x => x.CreatedByUserId != null && x.CreatedByUserId == id && x.isUsedForKinOrKith == true).ToListAsync();
+            return Ok(await kinOrKith);
+        }
     }
 }

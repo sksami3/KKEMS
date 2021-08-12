@@ -1,7 +1,7 @@
 export class BaseModel
 {
     ISDELETE: boolean;
-    ID: number;
+    id: number;
     CREATEDATE: Date;
     UPDATEDATE: Date;
 }
