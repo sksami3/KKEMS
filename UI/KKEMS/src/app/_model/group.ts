@@ -5,5 +5,5 @@ export class Group extends BaseModel
 {
     name: string;
     userId: number;
-    kithOrKins: Array<User>;
+    kithOrKins: Array<User> = [];
 }

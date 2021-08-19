@@ -12,6 +12,10 @@ namespace KKEMS.Core.Entity
 {
     public class Group : BaseModel
     {
+        public Group()
+        {
+            KithOrKins = new List<User>();
+        }
         public string Name { get; set; }
         #region Foreign Fields
         [DisplayName("User")]

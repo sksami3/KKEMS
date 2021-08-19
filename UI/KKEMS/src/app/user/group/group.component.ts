@@ -1,10 +1,13 @@
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/_model';
 import { Group } from 'src/app/_model/group';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
+import { ModalPopupService } from 'src/app/_service/modalService';
 import { ApiConst } from 'src/app/_utility/ApiConst';
 import { KkDialogComponent } from '../kk-dialog/kk-dialog.component';
 
@@ -33,15 +36,30 @@ export class GroupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private modalPopupService: ModalPopupService
+  ) { }
 
   openDialog() {
-    this.dialog.open(KkDialogComponent, {
+    let kkDialog = this.dialog.open(KkDialogComponent, {
       width: '550px'
     });
+
+    this.modalPopupService.getCloseEvent().subscribe(($e) => {
+      let kinOrkith = new User();
+      kinOrkith.id = $e.id;
+      kinOrkith.name = $e.name;
+
+      if(this.group.kithOrKins.length === 0){
+        this.group.kithOrKins = Array<User>();
+      }
+
+      this.group.kithOrKins.push(kinOrkith);
+      this.dataSource = this.group.kithOrKins;
+      console.log(this.group.kithOrKins)
+    })
   }
-  calcel(){
+  calcel() {
     this.dialog.closeAll();
   }
 
@@ -88,16 +106,16 @@ export class GroupComponent implements OnInit {
   }
 
   edit(id: string) {
-    
+
   }
   // private setUserObject() : User{
   //   this.user.EMAIL = this.groupForm.get('email');
   // }
-  private getGroupById(id : number) {
+  private getGroupById(id: number) {
     console.log('in getGroupById')
+    this.group.kithOrKins = Array<User>();
     this.httpService.getAsync(ApiConst.getGroup + id).then(data => {
       this.group = data;
-      console.log(this.group);
       this.groupForm.controls.groupName.setValue(this.group.name);
       this.dataSource = this.group.kithOrKins;
     })
