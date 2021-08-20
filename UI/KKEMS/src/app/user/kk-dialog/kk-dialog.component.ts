@@ -48,7 +48,6 @@ export class KkDialogComponent implements OnInit {
     let id = this.authService.userValue.id;
 
     this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
-      console.log(data);
       this.kinOrkiths = data;
       this.kks = this.kinOrkiths.map(o => {return {id: o.id, name: o.name} })
 
@@ -60,11 +59,11 @@ export class KkDialogComponent implements OnInit {
   }
 
   public getSelectedKK(kkId : any){
-    let result = this.kks.find(x => x.id == kkId)
+    let result = this.kks.find(x => x.id == kkId);
 
     this.modalPopupService.emit(result);
-    result = new User;
-    this.dialogRef.close();
+    
+    //this.dialogRef.close();
 
     //return kkId;
   }

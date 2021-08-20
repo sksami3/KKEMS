@@ -37,7 +37,6 @@ export class AuthenticationService {
     }
 
     loginByEmail(email: string) {
-        console.log(email);
         const httpOptions = {
             headers : new HttpHeaders({
               'Content-Type':  'application/json'
@@ -70,7 +69,6 @@ export class AuthenticationService {
     }
 
     sendResetLink(email: string,token: string) : Observable<boolean> {
-        console.log(token);
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

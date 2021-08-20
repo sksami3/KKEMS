@@ -30,7 +30,7 @@ namespace KKEMS.Data.Repositories
 
             group.Name = model.Name;
             group.KithOrKins = model.KithOrKins;
-            group.User = model.User;
+            //group.User = model.User;
             
             Update(group);
             await SaveChangesAsync();

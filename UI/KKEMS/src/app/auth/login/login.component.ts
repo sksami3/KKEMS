@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       }
       //insert
       else {
-        console.log(this.user);
         this.httpAuthService.login(this.loginForm.get('username')?.value, this.loginForm.get('passwordhash')?.value).subscribe(data => {
           // this.router.navigate(["/product-list"]);
           console.log('saved');

@@ -76,6 +76,7 @@ namespace KKEMS.Business.Repositories.Base
                 throw new ArgumentNullException(nameof(entity));
 
             entity.UpdateDate = DateTime.Now;
+            context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.Update(entity);
         }
 
@@ -116,7 +117,14 @@ namespace KKEMS.Business.Repositories.Base
 
         public async Task SaveChangesAsync()
         {
-            await context.SaveChangesAsync();
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

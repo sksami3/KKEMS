@@ -10,6 +10,7 @@ import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ModalPopupService } from 'src/app/_service/modalService';
 import { ApiConst } from 'src/app/_utility/ApiConst';
 import { KkDialogComponent } from '../kk-dialog/kk-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface KKElement {
   name: string;
@@ -26,10 +27,12 @@ export class GroupComponent implements OnInit {
   groupForm: FormGroup;
   group: Group = new Group();
   isEdit: boolean;
+  id: number;
 
-  kinOrkiths = [];
+  kinOrkiths = new Array<User>();
   displayedColumns: string[] = ['position', 'name', 'Actions'];
-  dataSource = this.group.kithOrKins;
+  dataSource = new MatTableDataSource<User>();
+  //dataSource = this.kinOrkiths;//this.group.kithOrKins;
   clickedRows = new Set<KKElement>();
 
   constructor(
@@ -44,20 +47,22 @@ export class GroupComponent implements OnInit {
     let kkDialog = this.dialog.open(KkDialogComponent, {
       width: '550px'
     });
-
+    let kinOrkith: User = new User();
     this.modalPopupService.getCloseEvent().subscribe(($e) => {
-      let kinOrkith = new User();
+      kinOrkith = new User();
       kinOrkith.id = $e.id;
       kinOrkith.name = $e.name;
 
-      if(this.group.kithOrKins.length === 0){
-        this.group.kithOrKins = Array<User>();
+      //this.kinOrkiths = new Array<User>();
+      if(this.kinOrkiths.find(x => x.id == $e.id) === undefined){
+        this.kinOrkiths.push(kinOrkith);
+        this.dataSource.data = this.kinOrkiths;
       }
-
-      this.group.kithOrKins.push(kinOrkith);
-      this.dataSource = this.group.kithOrKins;
-      console.log(this.group.kithOrKins)
+      console.log(this.kinOrkiths);
+      this.dialog.closeAll();
     })
+
+
   }
   calcel() {
     this.dialog.closeAll();
@@ -68,12 +73,12 @@ export class GroupComponent implements OnInit {
       groupName: [null, [Validators.required]]
     });
 
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(this.id);
 
-    if (id !== undefined || (typeof id === "string" && id !== "")) {
+    if (this.id !== undefined || (typeof this.id === "string" && this.id !== "")) {
       this.isEdit = true;
-      this.getGroupById(Number(id));
+      this.getGroupById(this.id);
     }
   }
 
@@ -82,12 +87,15 @@ export class GroupComponent implements OnInit {
     if (this.groupForm.valid) {
 
       this.group.name = this.groupForm.get('groupName')?.value;
+      
       //update
       if (this.isEdit) {
-        // this.httpService.postAsync(ApiConst.postUser, this.groupForm.value).subscribe(data => {
-        //   // this.router.navigate(["/product-list"]);
-
-        // })
+        this.group.kithOrKins = this.kinOrkiths;
+        this.group.id = this.id;
+        this.httpService.postAsync(ApiConst.updateGroup, this.group).subscribe(data => {
+          // this.router.navigate(["/product-list"]);
+          console.log('updated');
+        })
       }
       //insert
       else {
@@ -117,7 +125,8 @@ export class GroupComponent implements OnInit {
     this.httpService.getAsync(ApiConst.getGroup + id).then(data => {
       this.group = data;
       this.groupForm.controls.groupName.setValue(this.group.name);
-      this.dataSource = this.group.kithOrKins;
+      this.kinOrkiths = this.group.kithOrKins
+      this.dataSource.data = this.kinOrkiths;
     })
   }
 }

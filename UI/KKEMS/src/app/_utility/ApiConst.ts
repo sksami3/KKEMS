@@ -18,6 +18,7 @@ export class ApiConst {
      static authenticate = ApiConst.BASE_URL + '/api/Account/Authenticate';
 
      static postGroup = ApiConst.BASE_URL + '/api/Group/Add';
+     static updateGroup = ApiConst.BASE_URL + '/api/Group/Update';
      static getGroups = ApiConst.BASE_URL + '/api/Group/GetAll';
      static getGroup = ApiConst.BASE_URL + '/api/Group/Get/';
      static deleteGroup = ApiConst.BASE_URL + '/api/Group/Delete/';
