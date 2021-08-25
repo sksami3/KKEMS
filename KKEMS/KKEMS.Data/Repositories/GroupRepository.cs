@@ -32,6 +32,7 @@ namespace KKEMS.Data.Repositories
             var group = await Group(model.Id);
 
             group.Name = model.Name;
+            group.KithOrKins.Clear();
             group.KithOrKins = await GetKithOrKinList(model.KithOrKins.Select(x => x.Id).ToList());
             //group.User = model.User;
             

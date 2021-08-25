@@ -76,7 +76,7 @@ namespace KKEMS.Business.Repositories.Base
                 throw new ArgumentNullException(nameof(entity));
 
             entity.UpdateDate = DateTime.Now;
-            context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.Entry(entity).State = EntityState.Modified;
             context.Update(entity);
         }
 

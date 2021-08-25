@@ -76,7 +76,7 @@ export class GroupComponent implements OnInit {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.id);
 
-    if (this.id !== undefined || (typeof this.id === "string" && this.id !== "")) {
+    if (this.id !== 0 || (typeof this.id === "string" && this.id !== "")) {
       this.isEdit = true;
       this.getGroupById(this.id);
     }
@@ -99,6 +99,7 @@ export class GroupComponent implements OnInit {
       }
       //insert
       else {
+        console.log('in group insert');
         this.httpService.postAsync(ApiConst.postGroup, this.group).subscribe(data => {
           // this.router.navigate(["/product-list"]);
           console.log('saved');
