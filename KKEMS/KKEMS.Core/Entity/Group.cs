@@ -21,9 +21,9 @@ namespace KKEMS.Core.Entity
         [DisplayName("User")]
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public ICollection<User> KithOrKins { get; set; }
+        public virtual ICollection<User> KithOrKins { get; set; }
         #endregion
     }
 }

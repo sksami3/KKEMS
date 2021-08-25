@@ -36,7 +36,8 @@ namespace KKEMS.WebApi.Controllers
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetGroupById(int id)
         {
-            return Ok(await _groupService.GetGroupById(id));
+            var group = await _groupService.GetGroupById(id);
+            return Ok(group);
         }
         [HttpPost("Add")]
         public async Task<IActionResult> CreateGroup(/*[FromForm]*/ Group group)

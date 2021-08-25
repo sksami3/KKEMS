@@ -1,9 +1,12 @@
 ﻿using KKEMS.Business.Repositories.Base;
 using KKEMS.Core.Entity;
+using KKEMS.Core.Entity.Auth;
 using KKEMS.Core.Exception;
 using KKEMS.Core.Interfaces.Repositories;
 using KKEMS.Data.DbContext;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -29,7 +32,7 @@ namespace KKEMS.Data.Repositories
             var group = await Group(model.Id);
 
             group.Name = model.Name;
-            group.KithOrKins = model.KithOrKins;
+            group.KithOrKins = await GetKithOrKinList(model.KithOrKins.Select(x => x.Id).ToList());
             //group.User = model.User;
             
             Update(group);
@@ -50,6 +53,19 @@ namespace KKEMS.Data.Repositories
             if (group == null)
                 throw new GenericException(Exceptions.GroupNotFound);
             return group;
+        }
+
+        private async Task<List<User>> GetKithOrKinList(List<int> kkIds)
+        {
+            List<User> kks = new List<User>();
+
+            foreach(int kkId in kkIds)
+            {
+                var kk = await _context.Users.FindAsync(kkId);
+                kks.Add(kk);
+            }
+
+            return kks;
         }
     }
 }

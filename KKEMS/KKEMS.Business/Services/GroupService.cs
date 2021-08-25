@@ -32,7 +32,8 @@ namespace KKEMS.Business.Services
 
         public async Task<IEnumerable<Group>> GetGroups(int userId)
         {
-            return await _groupRepository.All().Where(x => x.UserId == userId).ToListAsync();
+            var groups = await _groupRepository.All().Where(x => x.UserId == userId).ToListAsync();
+            return groups;
         }
 
         public async Task Remove(int groupId)
