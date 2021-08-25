@@ -19,17 +19,17 @@ namespace KKEMS.Core.Entity
         [DisplayName("User")]
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [DisplayName("Kith Or Kin")]
         [ForeignKey("KithOrKin")]
         public Nullable<int> KithOrKinId { get; set; }
-        public User KithOrKin { get; set; }
+        public virtual User KithOrKin { get; set; }
 
         [DisplayName("Group")]
         [ForeignKey("Group")]
         public Nullable<int> GroupId { get; set; }
-        public Group Group { get; set; }
+        public virtual Group Group { get; set; }
         #endregion
     }
 }

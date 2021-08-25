@@ -15,12 +15,12 @@ namespace KKEMS.Core.Entity
     {
         public string Name { get; set; }
         #region Foreign Fields
-        public ICollection<User> KithOrKins { get; set; }
+        public virtual ICollection<User> KithOrKins { get; set; }
 
         [DisplayName("Group")]
         [ForeignKey("Group")]
         public int GroupId { get; set; }
-        public Group Group { get; set; }
+        public virtual Group Group { get; set; }
         #endregion
     }
 }

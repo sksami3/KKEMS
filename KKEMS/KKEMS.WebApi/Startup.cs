@@ -46,7 +46,7 @@ namespace KKEMS.WebApi
             //});
 
             services.AddDbContext<KKEMSDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             var identity = services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequiredLength = 4;

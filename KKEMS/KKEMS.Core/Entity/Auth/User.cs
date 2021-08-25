@@ -18,8 +18,8 @@ namespace KKEMS.Core.Entity.Auth
         [Required]
         public bool isUsedForKinOrKith { get; set; }
         [NotMapped]
-        public ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
         [NotMapped]
-        public ICollection<Relationship> Relationships { get; set; }
+        public virtual ICollection<Relationship> Relationships { get; set; }
     }
 }
