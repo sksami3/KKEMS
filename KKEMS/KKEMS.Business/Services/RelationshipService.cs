@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace KKEMS.Business.Services
 {
@@ -28,9 +29,9 @@ namespace KKEMS.Business.Services
             return await _relationshipRepository.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Relationship>> GetRelationships()
+        public async Task<IEnumerable<Relationship>> GetRelationships(int userId)
         {
-            return await _relationshipRepository.All().ToListAsync();
+            return await _relationshipRepository.All().Where(x => x.Group.UserId == userId).ToListAsync();
         }
 
         public async Task Remove(int relationshipId)

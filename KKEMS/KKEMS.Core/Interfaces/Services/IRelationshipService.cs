@@ -9,7 +9,7 @@ namespace KKEMS.Core.Interfaces.Services
     public interface IRelationshipService
     {
         Task Add(Relationship relationship);
-        Task<IEnumerable<Relationship>> GetRelationships();
+        Task<IEnumerable<Relationship>> GetRelationships(int userId);
         Task Update(Relationship relationship);
         Task Remove(int relationshipId);
         Task<Relationship> GetRelationshipById(int id);

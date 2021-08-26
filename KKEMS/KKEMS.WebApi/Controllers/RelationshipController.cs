@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace KKEMS.WebApi.Controllers
@@ -23,7 +24,11 @@ namespace KKEMS.WebApi.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllRelationships()
         {
-            var relationship = await _relationshipService.GetRelationships();
+            int userId = 0;
+            if (User != null)
+                userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+
+            var relationship = await _relationshipService.GetRelationships(userId);
             return Ok(relationship);
         }
         [HttpGet("Get/{id}")]

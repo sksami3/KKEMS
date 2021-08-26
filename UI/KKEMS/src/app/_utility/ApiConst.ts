@@ -23,4 +23,10 @@ export class ApiConst {
      static getGroup = ApiConst.BASE_URL + '/api/Group/Get/';
      static deleteGroup = ApiConst.BASE_URL + '/api/Group/Delete/';
 
+     static postRelationship = ApiConst.BASE_URL + '/api/Relationship/Add';
+     static updateRelationship = ApiConst.BASE_URL + '/api/Relationship/Update';
+     static getRelationships = ApiConst.BASE_URL + '/api/Relationship/GetAll';
+     static getRelationship = ApiConst.BASE_URL + '/api/Relationship/Get/';
+     static deleteRelationship = ApiConst.BASE_URL + '/api/Relationship/Delete/';
+
 }
