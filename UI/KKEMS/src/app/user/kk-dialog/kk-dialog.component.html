@@ -9,7 +9,7 @@
         <!-- <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{option}}
             </mat-option> -->
-        <mat-option *ngFor="let kk of kks" [value]="kk.id" >
+        <mat-option *ngFor="let kk of filteredOptions | async" [value]="kk.id" >
           {{kk.name}}
         </mat-option>
       </mat-autocomplete>

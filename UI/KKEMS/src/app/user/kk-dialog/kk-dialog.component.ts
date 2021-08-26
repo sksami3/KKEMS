@@ -10,6 +10,11 @@ import { ModalPopupService } from 'src/app/_service/modalService';
 import { ApiConst } from 'src/app/_utility/ApiConst';
 import { GroupComponent } from '../group/group.component';
 
+export class kk {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-kk-dialog',
   templateUrl: './kk-dialog.component.html',
@@ -18,30 +23,34 @@ import { GroupComponent } from '../group/group.component';
 export class KkDialogComponent implements OnInit {
 
   kinOrkiths: User[];
-  isReady: boolean= false;
+  isReady: boolean = false;
   selectedValue: any;
 
   constructor(private httpService: HttpClientService,
-     private authService: AuthenticationService,
-     private dialogRef: MatDialogRef<GroupComponent>,
-     private modalPopupService :ModalPopupService) { }
+    private authService: AuthenticationService,
+    private dialogRef: MatDialogRef<GroupComponent>,
+    private modalPopupService: ModalPopupService) { }
 
   myControl = new FormControl();
   //options: string[];// = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<kk[]>;
 
-  kks: Array<{ id: number; name: string }>;
+  kks: Array<kk>;
 
   ngOnInit() {
     this.getKinOrKith();
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): kk[] {
     const filterValue = value.toLowerCase();
 
     //return this.options.filter(option => option.toLowerCase().includes(filterValue));
-    let result = this.kks.filter(kk => kk.name.toLowerCase().includes(filterValue));
-    return result.map(x => x.name);
+
+    let result = this.kks.filter(val => val.name.toLowerCase().includes(filterValue));
+    return result;//.map(x => x.id, x.name);
+
+    // return this.kks.map(x => x.name).filter(option =>
+    //   option.toLowerCase().includes(value.toLowerCase()));
   }
 
   private getKinOrKith() {
@@ -49,7 +58,7 @@ export class KkDialogComponent implements OnInit {
 
     this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
       this.kinOrkiths = data;
-      this.kks = this.kinOrkiths.map(o => {return {id: o.id, name: o.name} })
+      this.kks = this.kinOrkiths.map(o => { return { id: o.id, name: o.name } })
 
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
@@ -58,14 +67,10 @@ export class KkDialogComponent implements OnInit {
     })
   }
 
-  public getSelectedKK(kkId : any){
+  public getSelectedKK(kkId: any) {
     let result = this.kks.find(x => x.id == kkId);
 
     this.modalPopupService.emit(result);
-    
-    //this.dialogRef.close();
-
-    //return kkId;
   }
 
 }
