@@ -33,6 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ModalPopupService } from '../_service/modalService';
 import { DialogConfirmComponent } from '../common/dialog-confirm/dialog-confirm.component';
+import { RelationshipComponent } from './relationship/relationship.component';
+import { RelationshipListComponent } from './relationship-list/relationship-list.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DialogConfirmComponent } from '../common/dialog-confirm/dialog-confirm.
     KithorkinComponent,
     KithorkinListComponent,
     DialogConfirmComponent,
-    KkDialogComponent
+    KkDialogComponent,
+    RelationshipComponent,
+    RelationshipListComponent
   ],
   imports: [
     CommonModule,
