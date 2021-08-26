@@ -1,5 +1,10 @@
+import { Group } from "./group";
+import { User } from "./user";
+
 export class Relationship
 {
-    NAME: string;
-    GROUPID: number;
+    id: number;
+    name: string;
+    groupId: number;
+    kithOrKins: Array<User> = [];
 }

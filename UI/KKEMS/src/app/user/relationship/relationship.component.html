@@ -1,1 +1,72 @@
-<p>relationship works!</p>
+<div class="example-button-container">
+    <button mat-fab color="accent" [disabled]="!relationshipForm.valid" aria-label="save" (click)="submit()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+
+
+<div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
+
+    <form [formGroup]="relationshipForm" fxLayout="column">
+        <div>
+            <mat-form-field required appearance="outline">
+                <mat-label> Relationship
+                </mat-label>
+                <input matInput formControlName="relationshipName" type="relationshipName" name="relationshipName" type="text" required>
+                <mat-error *ngIf="relationshipForm.controls.relationshipName.touched && relationshipForm.controls.relationshipName.invalid">
+                    <span *ngIf="relationshipForm.controls.relationshipName.errors?.required">This field is mandatory.</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field required appearance="outline">
+                <mat-label> Group
+                </mat-label>
+                <input matInput formControlName="groupName" type="groupName" name="groupName" type="text" required>
+                <mat-error *ngIf="relationshipForm.controls.groupName.touched && relationshipForm.controls.groupName.invalid">
+                    <span *ngIf="relationshipForm.controls.groupName.errors?.required">This field is mandatory.</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div *ngIf="isEdit" fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch"
+        [style.margin-top]="'5%'">
+
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-button (click)="openDialog()">+Add</button>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>No.</th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-icon-button (click)="edit(element.id)">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                    <a mat-icon-button (click)="deleteKK(element.id)">
+                        <mat-icon>delete</mat-icon>
+                    </a>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+</div>
