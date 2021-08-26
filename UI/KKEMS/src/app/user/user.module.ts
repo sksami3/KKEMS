@@ -32,6 +32,7 @@ import { KkDialogComponent } from './kk-dialog/kk-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ModalPopupService } from '../_service/modalService';
+import { DialogConfirmComponent } from '../common/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ModalPopupService } from '../_service/modalService';
     GroupListComponent,
     KithorkinComponent,
     KithorkinListComponent,
+    DialogConfirmComponent,
     KkDialogComponent
   ],
   imports: [

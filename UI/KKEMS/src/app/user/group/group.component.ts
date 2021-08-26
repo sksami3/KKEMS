@@ -11,6 +11,7 @@ import { ModalPopupService } from 'src/app/_service/modalService';
 import { ApiConst } from 'src/app/_utility/ApiConst';
 import { KkDialogComponent } from '../kk-dialog/kk-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmDialogModel, DialogConfirmComponent } from 'src/app/common/dialog-confirm/dialog-confirm.component';
 
 export interface KKElement {
   name: string;
@@ -54,7 +55,7 @@ export class GroupComponent implements OnInit {
       kinOrkith.name = $e.name;
 
       //this.kinOrkiths = new Array<User>();
-      if(this.kinOrkiths.find(x => x.id == $e.id) === undefined){
+      if (this.kinOrkiths.find(x => x.id == $e.id) === undefined) {
         this.kinOrkiths.push(kinOrkith);
         this.dataSource.data = this.kinOrkiths;
       }
@@ -87,7 +88,7 @@ export class GroupComponent implements OnInit {
     if (this.groupForm.valid) {
 
       this.group.name = this.groupForm.get('groupName')?.value;
-      
+
       //update
       if (this.isEdit) {
         this.group.kithOrKins = this.kinOrkiths;
@@ -111,7 +112,24 @@ export class GroupComponent implements OnInit {
   }
 
   deleteKK(id: string) {
+    const message = `Are you sure you want to delete?`;
 
+    const dialogData = new ConfirmDialogModel("Confirm Action", message);
+
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult == true) {
+        const index = this.kinOrkiths.findIndex(obj => obj.id === Number(id))
+        if (index > -1) {
+          this.kinOrkiths.splice(index, 1);
+        }
+        this.dataSource.data = this.kinOrkiths;
+      }
+    });
   }
 
   edit(id: string) {
