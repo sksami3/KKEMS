@@ -12,6 +12,8 @@ import { ApiConst } from 'src/app/_utility/ApiConst';
 import { KkDialogComponent } from '../kk-dialog/kk-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogModel, DialogConfirmComponent } from 'src/app/common/dialog-confirm/dialog-confirm.component';
+import { GroupDialogComponent } from '../group-dialog/group-dialog.component';
+import { Group } from 'src/app/_model/group';
 
 export interface KKElement {
   name: string;
@@ -29,6 +31,8 @@ export class RelationshipComponent implements OnInit {
   id: number;
 
   kinOrkiths = new Array<User>();
+  Groups = new Array<Group>();
+  Group = new Group();
   displayedColumns: string[] = ['position', 'name', 'Actions'];
   dataSource = new MatTableDataSource<User>();
   //dataSource = this.kinOrkiths;//this.relationship.kithOrKins;
@@ -39,8 +43,23 @@ export class RelationshipComponent implements OnInit {
     private httpService: HttpClientService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private modalPopupService: ModalPopupService
+    private modalPopupService: ModalPopupService,
+    private authService: AuthenticationService
   ) { }
+
+  ngOnInit() {
+    this.relationshipForm = this.formBuilder.group({
+      relationshipName: [null, [Validators.required]],
+      groupName: [null, [Validators.required]]
+    });
+
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (this.id !== 0 || (typeof this.id === "string" && this.id !== "")) {
+      this.isEdit = true;
+      this.getRelationshipById(this.id);
+    }
+  }
 
   openDialog() {
     let kkDialog = this.dialog.open(KkDialogComponent, {
@@ -67,19 +86,28 @@ export class RelationshipComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  ngOnInit() {
-    this.relationshipForm = this.formBuilder.group({
-      relationshipName: [null, [Validators.required]],
-      groupName: [null, [Validators.required]]
+  openGroupDialog() {
+    let groupDialog = this.dialog.open(GroupDialogComponent, {
+      width: '550px'
     });
+    let group: Group = new Group();
+    this.modalPopupService.getCloseEvent().subscribe(($e) => {
+      group = new Group();
+      group.id = $e.id;
+      group.name = $e.name;
 
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.id);
+      //this.kinOrkiths = new Array<User>();
+      if (this.Groups.find(x => x.id == $e.id) === undefined) {
+        this.Groups.push(group);
+        //this.dataSource.data = this.kinOrkiths;
+      }
+      this.dialog.closeAll();
+    })
 
-    if (this.id !== 0 || (typeof this.id === "string" && this.id !== "")) {
-      this.isEdit = true;
-      this.getRelationshipById(this.id);
-    }
+
+  }
+  calcelGroup() {
+    this.dialog.closeAll();
   }
 
   submit() {
@@ -149,5 +177,11 @@ export class RelationshipComponent implements OnInit {
       this.dataSource.data = this.kinOrkiths;
     })
   }
+
+  // private getGroups() {
+  //   this.httpService.getAsync(ApiConst.getGroups).then(data => {
+  //     this.Groups = data;
+  //   })
+  // }
 }
 

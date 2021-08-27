@@ -35,6 +35,7 @@ import { ModalPopupService } from '../_service/modalService';
 import { DialogConfirmComponent } from '../common/dialog-confirm/dialog-confirm.component';
 import { RelationshipComponent } from './relationship/relationship.component';
 import { RelationshipListComponent } from './relationship-list/relationship-list.component';
+import { GroupDialogComponent } from './group-dialog/group-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { RelationshipListComponent } from './relationship-list/relationship-list
     DialogConfirmComponent,
     KkDialogComponent,
     RelationshipComponent,
-    RelationshipListComponent
+    RelationshipListComponent,
+    GroupDialogComponent
   ],
   imports: [
     CommonModule,
