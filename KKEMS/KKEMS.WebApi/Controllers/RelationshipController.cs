@@ -17,9 +17,11 @@ namespace KKEMS.WebApi.Controllers
     public class RelationshipController : ControllerBase
     {
         private readonly IRelationshipService _relationshipService;
-        public RelationshipController(IRelationshipService relationshipService)
+        private readonly IGroupService _groupService;
+        public RelationshipController(IRelationshipService relationshipService, IGroupService groupService)
         {
             _relationshipService = relationshipService;
+            _groupService = groupService;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllRelationships()
@@ -34,7 +36,8 @@ namespace KKEMS.WebApi.Controllers
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> GetRelationshipById(int id)
         {
-            return Ok(await _relationshipService.GetRelationshipById(id));
+            var relationship = await _relationshipService.GetRelationshipById(id);
+            return Ok(relationship);
         }
         [HttpPost("Add")]
         public async Task<IActionResult> CreateRelationship(/*[FromForm]*/ Relationship relationship)
@@ -46,7 +49,7 @@ namespace KKEMS.WebApi.Controllers
             }
             else
                 relationship.Image = filename;*/
-
+            relationship.Group = await _groupService.GetGroupById(relationship.GroupId);
             await _relationshipService.Add(relationship);
             return Ok(relationship);
         }

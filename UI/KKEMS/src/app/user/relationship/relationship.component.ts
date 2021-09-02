@@ -96,10 +96,14 @@ export class RelationshipComponent implements OnInit {
       group.id = $e.id;
       group.name = $e.name;
 
+      this.relationship.groupId = group.id;
+      this.relationship.group = group;
+
+      console.log(this.relationship);
       //this.kinOrkiths = new Array<User>();
       if (this.Groups.find(x => x.id == $e.id) === undefined) {
-        this.Groups.push(group);
-        //this.dataSource.data = this.kinOrkiths;
+        //this.Groups.push(group);
+        this.relationshipForm.controls['groupName'].setValue(group.name);
       }
       this.dialog.closeAll();
     })
@@ -111,7 +115,7 @@ export class RelationshipComponent implements OnInit {
   }
 
   submit() {
-    this.relationship = new Relationship();
+    //this.relationship = new Relationship();
     if (this.relationshipForm.valid) {
 
       this.relationship.name = this.relationshipForm.get('relationshipName')?.value;
@@ -128,6 +132,7 @@ export class RelationshipComponent implements OnInit {
       //insert
       else {
         console.log('in relationship insert');
+        console.log(this.relationship);
         this.httpService.postAsync(ApiConst.postRelationship, this.relationship).subscribe(data => {
           // this.router.navigate(["/product-list"]);
           console.log('saved');
@@ -173,6 +178,7 @@ export class RelationshipComponent implements OnInit {
     this.httpService.getAsync(ApiConst.getRelationship + id).then(data => {
       this.relationship = data;
       this.relationshipForm.controls.relationshipName.setValue(this.relationship.name);
+      this.relationshipForm.controls.groupName.setValue(this.relationship.group.name);
       this.kinOrkiths = this.relationship.kithOrKins
       this.dataSource.data = this.kinOrkiths;
     })

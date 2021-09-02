@@ -6,5 +6,6 @@ export class Relationship
     id: number;
     name: string;
     groupId: number;
+    group: Group;
     kithOrKins: Array<User> = [];
 }

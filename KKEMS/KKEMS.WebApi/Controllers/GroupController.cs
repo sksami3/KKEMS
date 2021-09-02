@@ -71,9 +71,6 @@ namespace KKEMS.WebApi.Controllers
                 else
                     group.Image = filename;
             }*/
-            int userId = 0;
-            if (User != null)
-                userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
 
             await _groupService.Update(group);
             return Ok(group);

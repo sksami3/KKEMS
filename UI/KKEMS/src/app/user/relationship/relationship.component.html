@@ -22,12 +22,13 @@
             <mat-form-field required appearance="outline">
                 <mat-label> Group
                 </mat-label>
-                <input matInput formControlName="groupName" type="groupName"
-                 name="groupName" type="text" required (click) = "openGroupDialog()">
+                <input matInput readonly [disabled]="true" formControlName="groupName" type="groupName"
+                 name="groupName" type="text" required>
                 <mat-error *ngIf="relationshipForm.controls.groupName.touched && relationshipForm.controls.groupName.invalid">
                     <span *ngIf="relationshipForm.controls.groupName.errors?.required">This field is mandatory.</span>
                 </mat-error>
             </mat-form-field>
+            <button mat-button color="green" (click) = "openGroupDialog()">+Group</button>
         </div>
     </form>
 

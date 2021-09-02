@@ -1,10 +1,12 @@
 ﻿using KKEMS.Business.Repositories.Base;
 using KKEMS.Core.Entity;
+using KKEMS.Core.Entity.Auth;
 using KKEMS.Core.Exception;
 using KKEMS.Core.Interfaces.Repositories;
 using KKEMS.Data.DbContext;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,8 +25,8 @@ namespace KKEMS.Data.Repositories
             var relationship = await Relationship(model.Id);
 
             relationship.Name = model.Name;
-            relationship.KithOrKins = model.KithOrKins;
-            relationship.Group = model.Group;
+            relationship.KithOrKins.Clear();
+            relationship.KithOrKins = await GetKithOrKinList(model.KithOrKins.Select(x => x.Id).ToList());
             //relationship.User = model.User;
 
             Update(relationship);
@@ -43,6 +45,19 @@ namespace KKEMS.Data.Repositories
             if (relationship == null)
                 throw new GenericException(Exceptions.RelationshipNotFound);
             return relationship;
+        }
+
+        private async Task<List<User>> GetKithOrKinList(List<int> kkIds)
+        {
+            List<User> kks = new List<User>();
+
+            foreach (int kkId in kkIds)
+            {
+                var kk = await _context.Users.FindAsync(kkId);
+                kks.Add(kk);
+            }
+
+            return kks;
         }
     }
 }
