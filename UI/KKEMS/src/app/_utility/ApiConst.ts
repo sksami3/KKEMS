@@ -29,4 +29,10 @@ export class ApiConst {
      static getRelationship = ApiConst.BASE_URL + '/api/Relationship/Get/';
      static deleteRelationship = ApiConst.BASE_URL + '/api/Relationship/Delete/';
 
+     static postExpense = ApiConst.BASE_URL + '/api/Expense/Add';
+     static updateExpense = ApiConst.BASE_URL + '/api/Expense/Update';
+     static getExpenses = ApiConst.BASE_URL + '/api/Expense/GetAll';
+     static getExpense = ApiConst.BASE_URL + '/api/Expense/Get/';
+     static deleteExpense = ApiConst.BASE_URL + '/api/Expense/Delete/';
+
 }

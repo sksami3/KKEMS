@@ -1,9 +1,10 @@
 export class Expense
 {
-    REASON: string;
-    USERID: number;
-    KITHORKINID?: number;
-    GROUPID?: number;
-    EXPENSEDATE: Date;
-    COST: number;
+    id: number;
+    reason: string;
+    userId: number;
+    kinorkithId?: number;
+    groupId?: number;
+    expenseDate: Date;
+    cost: number;
 }

@@ -10,6 +10,7 @@
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
       <button mat-button routerLink="/User/relationship-list">Relationshipas</button>
       <button mat-button routerLink="/User/group-list">Groups</button>
+      <button mat-button routerLink="/User/expense-list">Expenses</button>
       <button mat-button routerLink="/dashboard">Dashboard</button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
@@ -20,6 +21,7 @@
 <mat-menu x-position="before" #menu="matMenu">
   <button mat-menu-item routerLink="/User/relationship-list">Relationshipas ()</button>
   <button mat-menu-item routerLink="/User/grouop-list">Groups ()</button>
+  <button mat-menu-item routerLink="/User/expense-list">Expenses ()</button>
   <button mat-menu-item routerLink="/dashboard">Dashboard ()</button>
   <!--<button mat-menu-item>Help</button>-->
 </mat-menu>

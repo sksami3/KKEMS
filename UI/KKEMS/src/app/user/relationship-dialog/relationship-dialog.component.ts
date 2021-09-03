@@ -4,61 +4,59 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from 'src/app/_model';
-import { Group } from 'src/app/_model/group';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ModalPopupService } from 'src/app/_service/modalService';
 import { ApiConst } from 'src/app/_utility/ApiConst';
-import { GroupComponent } from '../group/group.component';
+import { RelationshipComponent } from '../relationship/relationship.component';
 
-export class group {
+export class Relationship {
   id: number;
   name: string;
 }
-
 @Component({
-  selector: 'app-group-dialog',
-  templateUrl: './group-dialog.component.html',
-  styleUrls: ['./group-dialog.component.scss']
+  selector: 'app-relationship-dialog',
+  templateUrl: './relationship-dialog.component.html',
+  styleUrls: ['./relationship-dialog.component.scss']
 })
-export class GroupDialogComponent implements OnInit {
-  Groups: Group[];
+export class RelationshipDialogComponent implements OnInit {
+  Relationships: Relationship[];
   isReady: boolean = false;
   selectedValue: any;
 
   constructor(private httpService: HttpClientService,
     private authService: AuthenticationService,
-    private dialogRef: MatDialogRef<GroupComponent>,
+    private dialogRef: MatDialogRef<RelationshipComponent>,
     private modalPopupService: ModalPopupService) { }
 
   myControl = new FormControl();
   //options: string[];// = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<group[]>;
+  filteredOptions: Observable<Relationship[]>;
 
-  groups: Array<group>;
+  relationships: Array<Relationship>;
 
   ngOnInit() {
-    this.getGroups();
+    this.getRelationships();
   }
 
-  private _filter(value: string): group[] {
-    const filterValue = value.toString().toLowerCase();
+  private _filter(value: string): Relationship[] {
+    const filterValue = value;
 
     //return this.options.filter(option => option.toLowerCase().includes(filterValue));
 
-    let result = this.groups.filter(val => val.name.toString().toLowerCase().includes(filterValue));
+    let result = this.relationships.filter(val => val.name.toLowerCase().includes(filterValue));
     return result;//.map(x => x.id, x.name);
 
-    // return this.groups.map(x => x.name).filter(option =>
+    // return this.relationships.map(x => x.name).filter(option =>
     //   option.toLowerCase().includes(value.toLowerCase()));
   }
 
-  private getGroups() {
+  private getRelationships() {
     let id = this.authService.userValue.id;
 
-    this.httpService.getAsync(ApiConst.getGroups).then(data => {
-      this.Groups = data;
-      this.groups = this.Groups.map(o => { return { id: o.id, name: o.name } })
+    this.httpService.getAsync(ApiConst.getRelationships).then(data => {
+      this.Relationships = data;
+      this.relationships = this.Relationships.map(o => { return { id: o.id, name: o.name } })
 
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
@@ -67,10 +65,11 @@ export class GroupDialogComponent implements OnInit {
     })
   }
 
-  public getSelectedGroup(groupId: any) {
-    let result = this.groups.find(x => x.id == groupId);
+  public getSelectedRelationship(relationshipId: any) {
+    let result = this.relationships.find(x => x.id == relationshipId);
 
     this.modalPopupService.emit(result);
   }
 
 }
+

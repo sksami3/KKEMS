@@ -36,6 +36,11 @@ import { DialogConfirmComponent } from '../common/dialog-confirm/dialog-confirm.
 import { RelationshipComponent } from './relationship/relationship.component';
 import { RelationshipListComponent } from './relationship-list/relationship-list.component';
 import { GroupDialogComponent } from './group-dialog/group-dialog.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
+import { RelationshipDialogComponent } from './relationship-dialog/relationship-dialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,10 @@ import { GroupDialogComponent } from './group-dialog/group-dialog.component';
     KkDialogComponent,
     RelationshipComponent,
     RelationshipListComponent,
-    GroupDialogComponent
+    GroupDialogComponent,
+    ExpenseComponent,
+    ExpenseListComponent,
+    RelationshipDialogComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +89,12 @@ import { GroupDialogComponent } from './group-dialog/group-dialog.component';
     MatDialogModule,
     FormsModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

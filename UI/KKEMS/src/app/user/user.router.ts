@@ -2,6 +2,8 @@ import { Route } from '@angular/router';
 import { AuthComponent } from '../auth/auth.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
+import { ExpenseComponent } from './expense/expense.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupComponent } from './group/group.component';
 import { HeaderComponent } from './header/header.component';
@@ -26,7 +28,10 @@ export const UserRoutes: Route[] = [
             { path: 'relationship/:id', component: RelationshipComponent, data: { roles: ['Admin'] } },
             { path: 'kithorkin', component: KithorkinComponent, data: { roles: ['Admin'] } },
             { path: 'kithorkin/:id', component: KithorkinComponent, data: { roles: ['Admin'] } },
-            { path: 'kithorkin-list', component: KithorkinListComponent, data: { roles: ['Admin'] } }
+            { path: 'kithorkin-list', component: KithorkinListComponent, data: { roles: ['Admin'] } },
+            { path: 'expense-list', component: ExpenseListComponent, data: { roles: ['Admin'] } },
+            { path: 'expense', component: ExpenseComponent, data: { roles: ['Admin'] } },
+            { path: 'expense/:id', component: ExpenseComponent, data: { roles: ['Admin'] } },
         ]
     },
     {
