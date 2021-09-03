@@ -54,7 +54,7 @@ export class ExpenseComponent implements OnInit {
     this.getKinOrKith();
 
     this.expenseForm = this.formBuilder.group({
-      relationshipName: [null, [Validators.minLength(1)]],
+      relationshipName: [null],
       groupName: [null],
       kinOrKith: [null],
       cost: [null, [Validators.required]],
@@ -98,7 +98,7 @@ export class ExpenseComponent implements OnInit {
       this.expenseForm.controls['groupName'].setValue(group.name);
       this.expenseForm.controls.kinOrKith.setValue('');
 
-      this.expense.kinorkithId = 0;
+      this.expense.kithOrKinId = 0;
 
       this.dialog.closeAll();
     })
@@ -121,7 +121,7 @@ export class ExpenseComponent implements OnInit {
       //update
       if (this.isEdit) {
         this.expense.id = this.id;
-        this.httpService.postAsync(ApiConst.updateRelationship, this.expense).subscribe(data => {
+        this.httpService.postAsync(ApiConst.updateExpense, this.expense).subscribe(data => {
           // this.router.navigate(["/product-list"]);
           console.log('updated');
         })
@@ -130,7 +130,7 @@ export class ExpenseComponent implements OnInit {
       else {
         console.log('in expense insert');
         console.log(this.expense);
-        this.httpService.postAsync(ApiConst.postRelationship, this.expense).subscribe(data => {
+        this.httpService.postAsync(ApiConst.postExpense, this.expense).subscribe(data => {
           // this.router.navigate(["/product-list"]);
           console.log('saved');
         })
@@ -184,7 +184,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseForm.controls.groupName.setValue('');
     
     this.expense.groupId = 0;
-    this.expense.kinorkithId = result?.id;
+    this.expense.kithOrKinId = result?.id;
 
     this.modalPopupService.emit(result);
   }

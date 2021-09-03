@@ -36,7 +36,7 @@ export class KithorkinComponent implements OnInit {
 
       this.user = this.kinOrkithForm.value;
       this.user.PASSWORDHASH = 'kithOrkin123';
-      this.user.USERNAME = uuid.getDashFreeUUID().substring(0, 6);
+      this.user.username = uuid.getDashFreeUUID().substring(0, 6);
       this.user.isUsedForKinOrKith = true;
       console.log(this.user);
       //update

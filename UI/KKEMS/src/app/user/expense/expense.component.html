@@ -9,15 +9,15 @@
 
     <form [formGroup]="expenseForm" fxLayout="column">
         <div [hidden]="true">
-            <mat-form-field required appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label> Relationship
                 </mat-label>
                 <input matInput readonly [disabled]="true" formControlName="relationshipName" type="relationshipName"
-                    name="relationshipName" type="text" required>
-                <mat-error
+                    name="relationshipName" type="text">
+                <!-- <mat-error
                     *ngIf="expenseForm.controls.relationshipName.touched && expenseForm.controls.relationshipName.invalid">
                     <span *ngIf="expenseForm.controls.relationshipName.errors?.required">This field is mandatory.</span>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
         <div>

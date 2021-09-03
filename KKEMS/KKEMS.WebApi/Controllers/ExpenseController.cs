@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace KKEMS.WebApi.Controllers
@@ -16,9 +17,11 @@ namespace KKEMS.WebApi.Controllers
     public class ExpenseController : ControllerBase
     {
         private readonly IExpenseService _expenseService;
-        public ExpenseController(IExpenseService expenseService)
+        private readonly IUserService _userService;
+        public ExpenseController(IExpenseService expenseService, IUserService userService)
         {
             _expenseService = expenseService;
+            _userService = userService;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllExpenses()
@@ -41,7 +44,15 @@ namespace KKEMS.WebApi.Controllers
             }
             else
                 expense.Image = filename;*/
+            if (User != null)
+            {
+                int userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+                expense.UserId = userId;
+            }
+            if (expense.GroupId == 0)
+                expense.GroupId = null;
 
+            
             await _expenseService.Add(expense);
             return Ok(expense);
         }

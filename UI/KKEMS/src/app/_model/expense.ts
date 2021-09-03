@@ -3,7 +3,7 @@ export class Expense
     id: number;
     reason: string;
     userId: number;
-    kinorkithId?: number;
+    kithOrKinId?: number;
     groupId?: number;
     expenseDate: Date;
     cost: number;

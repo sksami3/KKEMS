@@ -104,8 +104,8 @@ namespace KKEMS.Web.Controllers
         [HttpGet("GetAllKinOrKithByCreatedUserId/{id}")]
         public async Task<IActionResult> GetAllKinOrKithByCreatedUserId(int id)
         {
-            var kinOrKith = UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == id && x.isUsedForKinOrKith == true).ToListAsync();
-            return Ok(await kinOrKith);
+            var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == id && x.isUsedForKinOrKith == true).ToListAsync();
+            return Ok(kinOrKith);
         }
     }
 }
