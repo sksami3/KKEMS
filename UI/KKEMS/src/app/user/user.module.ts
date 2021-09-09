@@ -43,6 +43,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     GroupDialogComponent,
     ExpenseComponent,
     ExpenseListComponent,
-    RelationshipDialogComponent
+    RelationshipDialogComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { AuthComponent } from '../auth/auth.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { GroupListComponent } from './group-list/group-list.component';
@@ -14,6 +15,11 @@ import { RelationshipComponent } from './relationship/relationship.component';
 import { UserComponent } from './user.component';
 
 export const UserRoutes: Route[] = [
+    {
+        path: '',
+        component: DashboardComponent
+    },
+
     {
         path: 'User',
         component: UserComponent,
@@ -32,6 +38,7 @@ export const UserRoutes: Route[] = [
             { path: 'expense-list', component: ExpenseListComponent, data: { roles: ['Admin'] } },
             { path: 'expense', component: ExpenseComponent, data: { roles: ['Admin'] } },
             { path: 'expense/:id', component: ExpenseComponent, data: { roles: ['Admin'] } },
+            { path: 'dashboard', component: DashboardComponent, data: { roles: ['Admin'] } }
         ]
     },
     {
