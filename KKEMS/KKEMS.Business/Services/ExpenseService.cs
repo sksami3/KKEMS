@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace KKEMS.Business.Services
 {
@@ -24,14 +25,22 @@ namespace KKEMS.Business.Services
             await _expenseRepository.SaveChangesAsync();
         }
 
-        public async Task<Expense> GetExpenseById(int guid)
+        public async Task<Expense> GetExpenseById(int Id)
         {
-            return await _expenseRepository.FindAsync(guid);
+            var exp = await _expenseRepository.FindAsync(Id);
+            //TODO remove this after adding ViewModel
+            exp.KKOrGroupName = exp.KKOrGroupName = exp.KithOrKin == null ? exp.Group.Name +" (Group)" : exp.KithOrKin.name;
+
+            return exp;
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses()
+        public async Task<IEnumerable<Expense>> GetExpenses(int userId)
         {
-            return await _expenseRepository.All().ToListAsync();
+            var expList = await _expenseRepository.All().Where(x => x.UserId == userId).ToListAsync();
+            //TODO change after adding View Model
+            expList.ForEach(x => x.KKOrGroupName = x.KithOrKin == null ? x.Group.Name + " (Group)" : x.KithOrKin.name);
+
+            return expList.OrderByDescending(x => x.ExpenseDate);
         }
 
         public async Task Remove(int expenseId)

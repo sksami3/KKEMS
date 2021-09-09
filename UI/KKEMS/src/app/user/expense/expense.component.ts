@@ -54,7 +54,7 @@ export class ExpenseComponent implements OnInit {
     this.getKinOrKith();
 
     this.expenseForm = this.formBuilder.group({
-      relationshipName: [null],
+      kinOrKithOrGroup: [null],
       groupName: [null],
       kinOrKith: [null],
       cost: [null, [Validators.required]],
@@ -113,9 +113,11 @@ export class ExpenseComponent implements OnInit {
   submit() {
     //this.expense = new Relationship();
     if (this.expenseForm.valid) {
-
+      //setting this for timezone issue
+      let eDate = new Date(this.expenseForm.get('expenseDate')?.value);
+      eDate.setDate(eDate.getDate() + 1);
       this.expense.cost = this.expenseForm.get('cost')?.value;
-      this.expense.expenseDate = this.expenseForm.get('expenseDate')?.value;
+      this.expense.expenseDate = eDate;
       this.expense.reason = this.expenseForm.get('reason')?.value;
 
       //update
@@ -147,7 +149,8 @@ export class ExpenseComponent implements OnInit {
   private getExpenseById(id: number) {
     this.httpService.getAsync(ApiConst.getExpense + id).then(data => {
       this.expense = data;
-      this.expenseForm.controls.relationshipName.setValue(this.expense.cost);
+      this.expenseForm.controls.cost.setValue(this.expense.cost);
+      this.expenseForm.controls.kinOrKithOrGroup.setValue(this.expense.kkOrGroupName);
       this.expenseForm.controls.expenseDate.setValue(this.expense.expenseDate);
       this.expenseForm.controls.reason.setValue(this.expense.reason);
     })
@@ -182,7 +185,7 @@ export class ExpenseComponent implements OnInit {
 
     this.expenseForm.controls.kinOrKith.setValue(result?.name);
     this.expenseForm.controls.groupName.setValue('');
-    
+
     this.expense.groupId = 0;
     this.expense.kithOrKinId = result?.id;
 

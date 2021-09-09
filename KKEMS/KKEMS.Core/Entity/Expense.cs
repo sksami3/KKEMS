@@ -31,5 +31,8 @@ namespace KKEMS.Core.Entity
         public Nullable<int> GroupId { get; set; }
         public virtual Group Group { get; set; }
         #endregion
+        //TODO change after adding view model
+        [NotMapped]
+        public string KKOrGroupName { get; set; }
     }
 }

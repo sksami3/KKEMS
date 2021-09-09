@@ -8,19 +8,15 @@
 <div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
 
     <form [formGroup]="expenseForm" fxLayout="column">
-        <div [hidden]="true">
+        <div [hidden]="!isEdit">
             <mat-form-field appearance="outline">
-                <mat-label> Relationship
+                <mat-label> Group/Relationship
                 </mat-label>
-                <input matInput readonly [disabled]="true" formControlName="relationshipName" type="relationshipName"
-                    name="relationshipName" type="text">
-                <!-- <mat-error
-                    *ngIf="expenseForm.controls.relationshipName.touched && expenseForm.controls.relationshipName.invalid">
-                    <span *ngIf="expenseForm.controls.relationshipName.errors?.required">This field is mandatory.</span>
-                </mat-error> -->
+                <input matInput readonly [disabled]="true" formControlName="kinOrKithOrGroup" type="text"
+                    name="kinOrKithOrGroup" type="text">
             </mat-form-field>
         </div>
-        <div>
+        <div [hidden]="isEdit">
             <mat-form-field appearance="outline">
                 <mat-label> Group
                 </mat-label>
@@ -33,7 +29,7 @@
             <button mat-button color="green" (click)="openGroupDialog()">+Group</button>
         </div>
 
-        <div>
+        <div [hidden]="isEdit">
             <mat-form-field required appearance="outline">
                 <mat-label>Kin Or Kith</mat-label>
                 <input type="text" matInput formControlName="kinOrKith" [matAutocomplete]="auto">

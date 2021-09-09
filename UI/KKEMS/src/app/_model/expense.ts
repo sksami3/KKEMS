@@ -7,4 +7,5 @@ export class Expense
     groupId?: number;
     expenseDate: Date;
     cost: number;
+    kkOrGroupName: string;
 }

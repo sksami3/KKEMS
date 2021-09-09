@@ -18,15 +18,23 @@ namespace KKEMS.WebApi.Controllers
     {
         private readonly IExpenseService _expenseService;
         private readonly IUserService _userService;
-        public ExpenseController(IExpenseService expenseService, IUserService userService)
+        private readonly IGroupService _groupService;
+        public ExpenseController(IExpenseService expenseService,
+                                     IUserService userService,
+                                    IGroupService groupService)
         {
             _expenseService = expenseService;
             _userService = userService;
+            _groupService = groupService;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllExpenses()
         {
-            var expense = await _expenseService.GetExpenses();
+            int userId = 0;
+            if (User != null)
+                userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+
+            var expense = await _expenseService.GetExpenses(userId);
             return Ok(expense);
         }
         [HttpGet("Get/{id}")]
@@ -44,15 +52,17 @@ namespace KKEMS.WebApi.Controllers
             }
             else
                 expense.Image = filename;*/
-            if (User != null)
+            int userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+            expense.UserId = userId;
+            if (expense.KithOrKinId == 0 || expense.KithOrKinId == null)
             {
-                int userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
-                expense.UserId = userId;
+                expense.Group = await _groupService.GetGroupById(Convert.ToInt32(expense.GroupId));
+                expense.KithOrKinId = null;
             }
-            if (expense.GroupId == 0)
+            else
                 expense.GroupId = null;
 
-            
+
             await _expenseService.Add(expense);
             return Ok(expense);
         }

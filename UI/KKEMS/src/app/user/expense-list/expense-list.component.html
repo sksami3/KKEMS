@@ -1,1 +1,55 @@
-<p>expense-list works!</p>
+<div class="example-button-container">
+    <button mat-fab color="accent" aria-label="add" routerLink="/User/expense">
+        <mat-icon>add_circle</mat-icon>
+    </button>
+</div>
+
+<div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="cost">
+            <th mat-header-cell *matHeaderCellDef>Cost</th>
+            <td mat-cell *matCellDef="let element">{{element.cost}}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef>Reason</th>
+            <td mat-cell *matCellDef="let element">{{element.reason}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="kkOrGroupName">
+            <th mat-header-cell *matHeaderCellDef>Kith Or Kin / Group</th>
+            <td mat-cell *matCellDef="let element">{{element.kkOrGroupName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="expenseDate">
+            <th mat-header-cell *matHeaderCellDef>Expense Date</th>
+            <td mat-cell *matCellDef="let element">{{element.expenseDate | date:'MMM d, YYYY' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <a mat-icon-button (click)="edit(element.id)">
+                    <mat-icon>edit</mat-icon>
+                </a>
+                <a mat-icon-button (click)="deleteExpense(element.id)">
+                    <mat-icon>delete</mat-icon>
+                </a>
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
+            *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
