@@ -2,7 +2,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_model';
 import { Group } from 'src/app/_model/group';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
@@ -41,7 +41,8 @@ export class GroupComponent implements OnInit {
     private httpService: HttpClientService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private modalPopupService: ModalPopupService
+    private modalPopupService: ModalPopupService,
+    private router : Router
   ) { }
 
   openDialog() {
@@ -105,9 +106,8 @@ export class GroupComponent implements OnInit {
           // this.router.navigate(["/product-list"]);
           console.log('saved');
         })
-        return;
       }
-      //console.log(this.groupForm.value);
+      this.router.navigate(["../User/group-list"]);
     }
   }
 

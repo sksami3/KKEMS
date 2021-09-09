@@ -1,17 +1,19 @@
 <mat-toolbar color="primary">
 
   <button mat-button routerLink="/">
-    <span><img src="/assets/img/logo.png" routerLink='/home' height=45 width=45></span> 
+    <span><img src="/assets/img/logo.png" routerLink='' height=45 width=45></span> 
   </button>
   <span >KKEMS</span>
 
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <button mat-button routerLink="/User/kithorkin-list">Kith Or Kin List</button>
       <button mat-button routerLink="/User/relationship-list">Relationshipas</button>
       <button mat-button routerLink="/User/group-list">Groups</button>
       <button mat-button routerLink="/User/expense-list">Expenses</button>
       <button mat-button routerLink="">Dashboard</button>
+      <button mat-button (click)="logout()">LogOut</button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
    <mat-icon>menu</mat-icon>
@@ -23,5 +25,6 @@
   <button mat-menu-item routerLink="/User/grouop-list">Groups ()</button>
   <button mat-menu-item routerLink="/User/expense-list">Expenses ()</button>
   <button mat-menu-item routerLink="">Dashboard ()</button>
+  <button mat-button (click)="logout()">LogOut ()</button>
   <!--<button mat-menu-item>Help</button>-->
 </mat-menu>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/_model';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
@@ -20,6 +21,7 @@ export class KithorkinComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -53,9 +55,8 @@ export class KithorkinComponent implements OnInit {
           // this.router.navigate(["/product-list"]);
           console.log('saved');
         })
-        return;
       }
-      //console.log(this.kinOrkithForm.value);
+      this.router.navigate(["../User/kithorkin-list"]);
     }
   }
 

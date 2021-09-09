@@ -2,7 +2,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_model';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
@@ -46,7 +46,8 @@ export class ExpenseComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private modalPopupService: ModalPopupService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -124,7 +125,6 @@ export class ExpenseComponent implements OnInit {
       if (this.isEdit) {
         this.expense.id = this.id;
         this.httpService.postAsync(ApiConst.updateExpense, this.expense).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
           console.log('updated');
         })
       }
@@ -133,13 +133,13 @@ export class ExpenseComponent implements OnInit {
         console.log('in expense insert');
         console.log(this.expense);
         this.httpService.postAsync(ApiConst.postExpense, this.expense).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
-          console.log('saved');
         })
-        return;
       }
       //console.log(this.expenseForm.value);
+      this.router.navigate(["../User/expense-list"]);
     }
+
+    
   }
 
   edit(id: string) {
