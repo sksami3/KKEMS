@@ -1,5 +1,7 @@
+import { ConditionalExpr } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/_model/user';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
@@ -20,6 +22,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
     private httpAuthService: AuthenticationService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -44,12 +47,10 @@ export class LoginComponent implements OnInit {
       //insert
       else {
         this.httpAuthService.login(this.loginForm.get('username')?.value, this.loginForm.get('passwordhash')?.value).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
           console.log('saved');
         })
-        return;
       }
-      //console.log(this.loginForm.value);
+      this.router.navigate([""]);
     }
   }
 
