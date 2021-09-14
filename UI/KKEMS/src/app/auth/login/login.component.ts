@@ -39,10 +39,6 @@ export class LoginComponent implements OnInit {
       //update
       if (this.user.id !== undefined || (typeof this.user.id === "string" && this.user.id !== "")) {
 
-        // this.httpService.postAsync(ApiConst.postUser, this.loginForm.value).subscribe(data => {
-        //   // this.router.navigate(["/product-list"]);
-
-        // })
       }
       //insert
       else {

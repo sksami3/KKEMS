@@ -107,5 +107,21 @@ namespace KKEMS.Web.Controllers
             var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == id && x.isUsedForKinOrKith == true).ToListAsync();
             return Ok(kinOrKith);
         }
+        [HttpPost("Delete/{userId}")]
+        public async Task<IActionResult> Delete(int userId)
+        {
+            try
+            {
+                var user = await UserManager.FindByIdAsync(userId.ToString());
+                await UserManager.DeleteAsync(user);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
+            return Ok();
+        }
+
     }
 }
