@@ -9,7 +9,7 @@ import { User } from '../_model/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private static BASE_URL = environment.apiUrl || "";
+    private static BASE_URL = /*"http://localhost:85";*/environment.apiUrl || "";
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 

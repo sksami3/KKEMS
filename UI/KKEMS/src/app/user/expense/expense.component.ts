@@ -18,6 +18,7 @@ import { RelationshipDialogComponent } from '../relationship-dialog/relationship
 import { Relationship } from 'src/app/_model/relationship';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 export class kk {
   id: number;
@@ -47,7 +48,8 @@ export class ExpenseComponent implements OnInit {
     public dialog: MatDialog,
     private modalPopupService: ModalPopupService,
     private authService: AuthenticationService,
-    private router : Router
+    private router : Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -125,18 +127,18 @@ export class ExpenseComponent implements OnInit {
       if (this.isEdit) {
         this.expense.id = this.id;
         this.httpService.postAsync(ApiConst.updateExpense, this.expense).subscribe(data => {
-          console.log('updated');
+          this.toastr.info('Updated Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/expense-list"]);
         })
       }
       //insert
       else {
-        console.log('in expense insert');
-        console.log(this.expense);
         this.httpService.postAsync(ApiConst.postExpense, this.expense).subscribe(data => {
+          this.toastr.success('Saved Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/expense-list"]);
         })
       }
-      //console.log(this.expenseForm.value);
-      this.router.navigate(["../User/expense-list"]);
+      
     }
 
     

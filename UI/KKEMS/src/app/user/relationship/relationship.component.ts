@@ -2,7 +2,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_model';
 import { Relationship } from 'src/app/_model/relationship';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogModel, DialogConfirmComponent } from 'src/app/common/dialog-confirm/dialog-confirm.component';
 import { GroupDialogComponent } from '../group-dialog/group-dialog.component';
 import { Group } from 'src/app/_model/group';
+import { ToastrService } from 'ngx-toastr';
 
 export interface KKElement {
   name: string;
@@ -44,7 +45,9 @@ export class RelationshipComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private modalPopupService: ModalPopupService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router : Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -125,8 +128,8 @@ export class RelationshipComponent implements OnInit {
         this.relationship.kithOrKins = this.kinOrkiths;
         this.relationship.id = this.id;
         this.httpService.postAsync(ApiConst.updateRelationship, this.relationship).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
-          console.log('updated');
+          this.toastr.success('Saved Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/relationship-list"]);
         })
       }
       //insert
@@ -134,8 +137,8 @@ export class RelationshipComponent implements OnInit {
         console.log('in relationship insert');
         console.log(this.relationship);
         this.httpService.postAsync(ApiConst.postRelationship, this.relationship).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
-          console.log('saved');
+          this.toastr.success('Saved Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/relationship-list"]);
         })
         return;
       }

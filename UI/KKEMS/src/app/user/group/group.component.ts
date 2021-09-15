@@ -12,6 +12,7 @@ import { ApiConst } from 'src/app/_utility/ApiConst';
 import { KkDialogComponent } from '../kk-dialog/kk-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogModel, DialogConfirmComponent } from 'src/app/common/dialog-confirm/dialog-confirm.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface KKElement {
   name: string;
@@ -42,7 +43,8 @@ export class GroupComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private modalPopupService: ModalPopupService,
-    private router : Router
+    private router : Router,
+    private toastr: ToastrService
   ) { }
 
   openDialog() {
@@ -95,19 +97,19 @@ export class GroupComponent implements OnInit {
         this.group.kithOrKins = this.kinOrkiths;
         this.group.id = this.id;
         this.httpService.postAsync(ApiConst.updateGroup, this.group).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
-          console.log('updated');
+          this.toastr.info('Updated Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/group-list"]);
         })
       }
       //insert
       else {
         console.log('in group insert');
         this.httpService.postAsync(ApiConst.postGroup, this.group).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
-          console.log('saved');
+          this.toastr.success('Saved Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/group-list"]);
         })
       }
-      this.router.navigate(["../User/group-list"]);
+      
     }
   }
 

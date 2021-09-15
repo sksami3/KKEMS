@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_model';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
@@ -21,7 +22,8 @@ export class KithorkinComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
-    private router : Router
+    private router : Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -43,20 +45,16 @@ export class KithorkinComponent implements OnInit {
       console.log(this.user);
       //update
       if (this.user.id !== undefined || (typeof this.user.id === "string" && this.user.id !== "")) {
-
-        // this.httpService.postAsync(ApiConst.postUser, this.kinOrkithForm.value).subscribe(data => {
-        //   // this.router.navigate(["/product-list"]);
-
-        // })
+        this.toastr.info('Updated Successfully!!', 'Congratulations...');
       }
       //insert
       else {
         this.httpService.postAsync(ApiConst.postUser, this.user).subscribe(data => {
-          // this.router.navigate(["/product-list"]);
-          console.log('saved');
+          this.toastr.success('Saved Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/kithorkin-list"]);
         })
       }
-      this.router.navigate(["../User/kithorkin-list"]);
+      
     }
   }
 
