@@ -5,7 +5,12 @@
 </div>
 
 <div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
-
+    <div class="filter-div">
+        <mat-form-field>
+            <input #filter matInput (keyup)="applyFilter(filter.value)" placeholder="Filter">
+        </mat-form-field>
+    </div>
+    
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
         <!-- Position Column -->
         <ng-container matColumnDef="position">
@@ -52,4 +57,6 @@
         <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
             *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

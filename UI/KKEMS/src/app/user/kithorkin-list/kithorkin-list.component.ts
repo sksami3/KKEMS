@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
@@ -14,22 +16,30 @@ export interface kithOrKinElement {
   templateUrl: './kithorkin-list.component.html',
   styleUrls: ['./kithorkin-list.component.scss']
 })
-export class KithorkinListComponent implements OnInit {
 
-  kithOrKins = [];
-  displayedColumns: string[] = ['position', 'name', 'createDate', 'Action'];
+export class KithorkinListComponent implements OnInit, AfterViewInit {
+
+  kithOrKins = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['position', 'name', 'email', 'Action'];
   dataSource = this.kithOrKins;
   clickedRows = new Set<kithOrKinElement>();
+  @ViewChild(MatPaginator) private paginator: MatPaginator;
 
   constructor(private httpService: HttpClientService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService : AuthenticationService) {
+    private authService: AuthenticationService) {
     this.getkithOrKins();
   }
 
   ngOnInit() {
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.name.toLowerCase().includes(filter) || data.symbol.toLowerCase().includes(filter) || data.position.toString() === filter;
+    };
+  }
 
+  ngAfterViewInit(): void {
+    this.kithOrKins.paginator = this.paginator;
   }
 
   getkithOrKins() {
@@ -37,7 +47,8 @@ export class KithorkinListComponent implements OnInit {
     this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
       this.kithOrKins = data;
 
-      this.dataSource = this.kithOrKins;
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     })
 
   }
@@ -53,5 +64,12 @@ export class KithorkinListComponent implements OnInit {
     this.router.navigate(['User/kithorkin/' + id]);
   }
 
-
+  /*
+    Filter
+  */
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 }
