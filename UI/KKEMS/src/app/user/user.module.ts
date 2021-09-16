@@ -45,6 +45,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
