@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using KKEMS.Core.ViewModel;
+using System.Globalization;
 
 namespace KKEMS.Business.Services
 {
@@ -41,6 +43,39 @@ namespace KKEMS.Business.Services
             expList.ForEach(x => x.KKOrGroupName = x.KithOrKin == null ? x.Group.Name + " (Group)" : x.KithOrKin.name);
 
             return expList.OrderByDescending(x => x.ExpenseDate);
+        }
+
+        public async Task<IEnumerable<StatisticsVM>> GetGroupExpenses(int userId)
+        {
+            List<StatisticsVM> stat = await _expenseRepository.All()
+                                            .Where(x => x.GroupId != null && x.UserId == userId)
+                                            .GroupBy(x => x.Group.Name)
+                                            .Select(x => new StatisticsVM { Name = x.Key, Total = x.Sum(x => x.Cost) })
+                                            .ToListAsync();
+
+            return stat;
+        }
+
+        public async Task<IEnumerable<StatisticsVM>> GetKithOrKinExpenses(int userId)
+        {
+            List<StatisticsVM> stat = await _expenseRepository.All()
+                                            .Where(x => x.KithOrKinId != null && x.UserId == userId)
+                                            .GroupBy(x => x.KithOrKin.name)
+                                            .Select(x => new StatisticsVM { Name = x.Key, Total = x.Sum(x => x.Cost) })
+                                            .ToListAsync();
+
+            return stat;
+        }
+
+        public async Task<IEnumerable<StatisticsVM>> GetMonthlyExpenseStatistics(int userId)
+        {
+            List<StatisticsVM> stat = await _expenseRepository.All()
+                                            .Where(x => x.UserId == userId)
+                                            .GroupBy(x => new { x.ExpenseDate.Month,x.ExpenseDate.Year })
+                                            .Select(x => new StatisticsVM { Name = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Convert.ToInt32(x.Key.Month)).ToString() + "-" + x.Key.Year.ToString(), Total = x.Sum(x => x.Cost) })
+                                            .ToListAsync();
+
+            return stat;
         }
 
         public async Task Remove(int expenseId)

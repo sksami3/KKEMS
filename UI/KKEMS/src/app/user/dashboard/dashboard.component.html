@@ -1,33 +1,45 @@
 <app-header></app-header>
 
 <!-- <div fxLayout="column" fxLayoutAlign="space-around center"> -->
-
-    <div fxLayout="row" fxLayoutAlign="space-around center" >
+<fieldset>
+    <legend style="color:slateblue;">Expense</legend>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
         <div style="display: block;" fxFlex="33">
-            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+            <canvas baseChart [data]="group_pieChartData" [labels]="group_pieChartLabels"
+                [chartType]="group_pieChartType" [options]="group_pieChartOptions" [plugins]="group_pieChartPlugins"
+                [legend]="group_pieChartLegend">
             </canvas>
         </div>
 
         <div style="display: block;" fxFlex="33">
-            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-            </canvas>
-        </div>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around center" >
-        <div style="display: block;" fxFlex="33">
-            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-            </canvas>
-        </div>
-
-        <div style="display: block;" fxFlex="33">
-            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+            <canvas baseChart [data]="group_pieChartData" [labels]="group_pieChartLabels"
+                [chartType]="group_pieChartType" [options]="group_pieChartOptions" [plugins]="group_pieChartPlugins"
+                [legend]="group_pieChartLegend">
             </canvas>
         </div>
     </div>
+</fieldset>
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <div style="display: block;" fxFlex="33">
+        <canvas baseChart [data]="kithOrkin_polarChartData" [labels]="kithOrkin_polarChartLabels"
+            [legend]="kithOrkin_polarChartLegend" [chartType]="kithOrkin_polarChartType">
+        </canvas>
+    </div>
+
+    <div style="display: block;" fxFlex="33">
+        <canvas baseChart [data]="kithOrkin_polarChartData" [labels]="kithOrkin_polarChartLabels"
+            [legend]="kithOrkin_polarChartLegend" [chartType]="kithOrkin_polarChartType">
+        </canvas>
+    </div>
+</div>
 
 <!-- </div> -->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <div style="display: block;" fxFlex="50">
+        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+            [chartType]="lineChartType" [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+</div>

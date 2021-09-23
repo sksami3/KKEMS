@@ -36,4 +36,8 @@ export class ApiConst {
      static getExpense = ApiConst.BASE_URL + '/api/Expense/Get/';
      static deleteExpense = ApiConst.BASE_URL + '/api/Expense/Delete/';
 
+     static groupExpenseStatistics = ApiConst.BASE_URL + '/api/Statistics/GetGroupStatistics';
+     static kithOrKinExpenseStatistics = ApiConst.BASE_URL + '/api/Statistics/GetKithOrKinStatistics';
+     static GetMonthlyExpenseStatistics = ApiConst.BASE_URL + '/api/Statistics/GetMonthlyExpenseStatistics';
+
 }

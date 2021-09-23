@@ -12,5 +12,6 @@ namespace KKEMS.Core.Interfaces.Services
         Task Update(Group group);
         Task Remove(int groupId);
         Task<Group> GetGroupById(int id);
+        //Task<Group> GetGroupsStatistic(int userId);
     }
 }
