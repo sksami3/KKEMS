@@ -1,7 +1,7 @@
 export class Statistics
 {
-    id: number;
+    // id: number;
     name: string;
     total: number;
-    grossTotal: number;
+    // grossTotal: number;
 }

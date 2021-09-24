@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientService } from '../_service/httpClient.service';
 import { Toastr } from '../_service/toastr.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../_helper/jwt.interceptor';
 import { ErrorInterceptor } from '../_helper/error.interceptor';
 import {MatTableModule} from '@angular/material/table';
@@ -46,6 +46,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ChartsModule } from 'ng2-charts';
+import { 
+	IgxCategoryChartModule,
+	IgxLegendModule
+ } from "igniteui-angular-charts";
 
 @NgModule({
   declarations: [
@@ -63,7 +67,7 @@ import { ChartsModule } from 'ng2-charts';
     ExpenseComponent,
     ExpenseListComponent,
     RelationshipDialogComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -104,7 +108,10 @@ import { ChartsModule } from 'ng2-charts';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     ToastrModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    HttpClientModule,
+    IgxCategoryChartModule,
+	  IgxLegendModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

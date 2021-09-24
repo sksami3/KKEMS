@@ -3,7 +3,7 @@
 <!-- <div fxLayout="column" fxLayoutAlign="space-around center"> -->
 <fieldset>
     <legend style="color:slateblue;">Expense</legend>
-    <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="group_pieChartData">
         <div style="display: block;" fxFlex="33">
             <canvas baseChart [data]="group_pieChartData" [labels]="group_pieChartLabels"
                 [chartType]="group_pieChartType" [options]="group_pieChartOptions" [plugins]="group_pieChartPlugins"
@@ -11,35 +11,36 @@
             </canvas>
         </div>
 
-        <div style="display: block;" fxFlex="33">
-            <canvas baseChart [data]="group_pieChartData" [labels]="group_pieChartLabels"
-                [chartType]="group_pieChartType" [options]="group_pieChartOptions" [plugins]="group_pieChartPlugins"
-                [legend]="group_pieChartLegend">
+        <div style="display: block;" fxFlex="33" *ngIf="kithOrkin_polarChartData">
+            <canvas baseChart [data]="kithOrkin_polarChartData" [labels]="kithOrkin_polarChartLabels"
+                [legend]="kithOrkin_polarChartLegend" [chartType]="kithOrkin_polarChartType">
             </canvas>
         </div>
+    </div>
+</fieldset><br>
+
+<fieldset>
+    <legend style="color:slateblue;">Monthly Expense</legend>
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <!-- </div> -->
+        <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="lineData">
+            <div style="display: block;" fxFlex="100">
+                <div class="options vertical">
+                    <span id="legendTitle">Monthly Expense</span>
+                    <igx-legend #legend orientation="horizontal"></igx-legend>
+                </div>
+                <div class="container">
+                    <igx-category-chart height="100%" width="100%" [dataSource]="lineData" [legend]="legend"
+                        chartType="line" yAxisTitle="Taka" yAxisTitleLeftMargin="100">
+                    </igx-category-chart>
+                </div>
+
+                
+            </div>
+
+
+        </div>
+
     </div>
 </fieldset>
-
-<div fxLayout="row" fxLayoutAlign="space-around center">
-    <div style="display: block;" fxFlex="33">
-        <canvas baseChart [data]="kithOrkin_polarChartData" [labels]="kithOrkin_polarChartLabels"
-            [legend]="kithOrkin_polarChartLegend" [chartType]="kithOrkin_polarChartType">
-        </canvas>
-    </div>
-
-    <div style="display: block;" fxFlex="33">
-        <canvas baseChart [data]="kithOrkin_polarChartData" [labels]="kithOrkin_polarChartLabels"
-            [legend]="kithOrkin_polarChartLegend" [chartType]="kithOrkin_polarChartType">
-        </canvas>
-    </div>
-</div>
-
-<!-- </div> -->
-<div fxLayout="row" fxLayoutAlign="space-around center">
-    <div style="display: block;" fxFlex="50">
-        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
-            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-            [chartType]="lineChartType" [plugins]="lineChartPlugins">
-        </canvas>
-    </div>
-</div>

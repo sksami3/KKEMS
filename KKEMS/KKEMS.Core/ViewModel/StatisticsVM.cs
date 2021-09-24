@@ -8,8 +8,8 @@ namespace KKEMS.Core.ViewModel
 {
     public class StatisticsVM
     {
-        public int GrossTotal { get; set; }
-        public int Id { get; set; }
+        //public int GrossTotal { get; set; }
+        //public int Id { get; set; }
         public string Name { get; set; }
         public double Total { get; set; }
     }
