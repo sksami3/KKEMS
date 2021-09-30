@@ -1,5 +1,6 @@
 using IdentityServer4.Stores;
 using KKEMS.Core.Entity.Auth;
+using KKEMS.Core.ViewModel;
 using KKEMS.Data.DbContext;
 using KKEMS.Web;
 using KKEMS.WebApi.Helper;
@@ -121,6 +122,10 @@ namespace KKEMS.WebApi
             IdentityModelEventSource.ShowPII = true;
             services.Resolve();
             services.AddControllers().AddNewtonsoftJson();
+
+            var builder = new ConfigurationBuilder();
+            var configuration = builder.Build();
+            ConnectionStringConfig.ConnectionString = configuration["Server=DESKTOP-SSR\\SQLEXPRESS;Database=KKEMS_DB;User Id=sa;password=sa1234;Trusted_Connection=False;MultipleActiveResultSets=true;"];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -23,6 +23,7 @@ namespace KKEMS.Web
             services.AddTransient<IRelationshipService, RelationshipService>();
             services.AddTransient<IExpenseService, ExpenseService>();
             services.AddTransient<ILoanService, LoanService>();
+            services.AddTransient<IReportService, ReportService>();
             #endregion
 
             #region repositories
