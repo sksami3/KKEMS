@@ -49,7 +49,10 @@ namespace KKEMS.Business.Services
 		                        RelationshipUser RU ON E.KithOrKinId = RU.KithOrKinsId LEFT JOIN
 		                        Relationships R ON R.Id = RU.RelationshipsId LEFT JOIN
 		                        Groups G ON G.Id = R.GroupId LEFT JOIN
-		                        Groups MG ON MG.Id = E.GroupId";
+		                        Groups MG ON MG.Id = E.GroupId
+                            --WHERE 
+								--E.UserId = {userId}
+								--AND E.ExpenseDate BETWEEN {fromDate} AND {toDate}";
             
             using (IDbConnection dbConnection = new SqlConnection("Server=DESKTOP-SSR\\SQLEXPRESS;Database=KKEMS_DB;User Id=sa;password=sa1234;Trusted_Connection=False;MultipleActiveResultSets=true;"))
             {

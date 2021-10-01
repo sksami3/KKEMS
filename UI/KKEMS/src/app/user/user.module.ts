@@ -50,6 +50,7 @@ import {
 	IgxCategoryChartModule,
 	IgxLegendModule
  } from "igniteui-angular-charts";
+import { ExpenseReportComponent } from './expense-report/expenseReport.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import {
     ExpenseListComponent,
     RelationshipDialogComponent,
     DashboardComponent,
+    ExpenseReportComponent,
   ],
   imports: [
     CommonModule,

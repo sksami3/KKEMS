@@ -1,0 +1,40 @@
+<div class="example-button-container">
+    <button mat-fab color="accent" [disabled]="!expenseReportForm.valid" aria-label="save" (click)="submit()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+
+
+<div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
+
+    <form [formGroup]="expenseReportForm" fxLayout="column">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>From Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fromDate" name="fromDate" type="text">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+
+                <mat-error *ngIf="expenseReportForm.controls.fromDate.touched && expenseReportForm.controls.fromDate.invalid">
+                    <span *ngIf="expenseReportForm.controls.fromDate.errors?.required">This field is mandatory.</span>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>To Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="toDate" name="toDate" type="text">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+
+                <mat-error *ngIf="expenseReportForm.controls.toDate.touched && expenseReportForm.controls.toDate.invalid">
+                    <span *ngIf="expenseReportForm.controls.toDate.errors?.required">This field is mandatory.</span>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+    </form>
+
+</div>
