@@ -49,12 +49,8 @@ export class ExpenseReportComponent implements OnInit {
       fDate.setDate(fDate.getDate() + 1);
       tDate.setDate(tDate.getDate() + 1);
 
-      let filterModel = {
-        fromDate: fDate,
-        toDate: tDate
-      }
-
-      this.httpService.postAsync(ApiConst.GetExpenseReport, filterModel).subscribe(data => {
+      this.httpService.getAsync(ApiConst.GetExpenseReport 
+        + "fromDate=" + fDate.toISOString() + "&toDate=" + tDate.toISOString()).then(data => {
         console.log(data);
       })
     }

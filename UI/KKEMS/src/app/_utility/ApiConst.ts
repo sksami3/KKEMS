@@ -40,6 +40,6 @@ export class ApiConst {
      static kithOrKinExpenseStatistics = ApiConst.BASE_URL + '/api/Statistics/GetKithOrKinStatistics';
      static GetMonthlyExpenseStatistics = ApiConst.BASE_URL + '/api/Statistics/GetMonthlyExpenseStatistics';
 
-     static GetExpenseReport = ApiConst.BASE_URL + '/api/Report/GetExpenseReport/';
+     static GetExpenseReport = ApiConst.BASE_URL + '/api/Report/GetExpenseReport?';
 
 }

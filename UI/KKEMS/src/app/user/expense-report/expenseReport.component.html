@@ -11,9 +11,9 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>From Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="fromDate" name="fromDate" type="text">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input matInput [matDatepicker]="from_date_picker" formControlName="fromDate" name="fromDate" type="text">
+                <mat-datepicker-toggle matSuffix [for]="from_date_picker"></mat-datepicker-toggle>
+                <mat-datepicker #from_date_picker></mat-datepicker>
 
                 <mat-error *ngIf="expenseReportForm.controls.fromDate.touched && expenseReportForm.controls.fromDate.invalid">
                     <span *ngIf="expenseReportForm.controls.fromDate.errors?.required">This field is mandatory.</span>
@@ -25,9 +25,9 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>To Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="toDate" name="toDate" type="text">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input matInput [matDatepicker]="to_date_picker" formControlName="toDate" name="toDate" type="text">
+                <mat-datepicker-toggle matSuffix [for]="to_date_picker"></mat-datepicker-toggle>
+                <mat-datepicker #to_date_picker></mat-datepicker>
 
                 <mat-error *ngIf="expenseReportForm.controls.toDate.touched && expenseReportForm.controls.toDate.invalid">
                     <span *ngIf="expenseReportForm.controls.toDate.errors?.required">This field is mandatory.</span>
