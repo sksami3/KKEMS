@@ -1,4 +1,5 @@
-﻿using KKEMS.Core.ViewModel;
+﻿using KKEMS.Core.Entity;
+using KKEMS.Core.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,15 @@ namespace KKEMS.WebApi.Helper
             Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
             Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
             return Convert.ToBase64String(dst);
+        }
+
+        public static bool ExpenseValidation(Expense expense)
+        {
+            if(expense.KithOrKinId != null || expense.GroupId != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using KKEMS.Core.Entity;
 using KKEMS.Core.Interfaces.Services;
+using KKEMS.WebApi.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,12 @@ namespace KKEMS.WebApi.Controllers
             else
                 expense.GroupId = null;
 
+            #region Validation
+            if (!Common.ExpenseValidation(expense))
+            {
+                return BadRequest("Please choose Kith Or Kin or Group");
+            }
+            #endregion
 
             await _expenseService.Add(expense);
             return Ok(expense);
