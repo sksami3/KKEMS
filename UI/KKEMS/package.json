@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.12",
     "@angular/router": "~11.2.12",
     "chart.js": "^2.9.3",
+    "faker": "^5.5.3",
     "igniteui-angular-core": "^12.1.1",
     "jspdf": "^2.4.0",
     "jspdf-autotable": "^3.5.20",
