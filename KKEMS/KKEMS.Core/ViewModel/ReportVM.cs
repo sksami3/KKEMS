@@ -12,7 +12,7 @@ namespace KKEMS.Core.ViewModel
         public Decimal Cost { get; set; }
         public string ReasonOfExpense { get; set; }
         public string WhatKindOfRelation_GROUP { get; set; }
-        public string RelationWithMe { get; set; }
+        public string RelationWithYou { get; set; }
         public DateTime ExpenseDate { get; set; }
     }
 }

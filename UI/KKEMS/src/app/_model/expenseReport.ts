@@ -4,6 +4,6 @@ export class ExpenseReport
     cost: number;
     reasonOfExpense: number;
     whatKindOfRelation_GROUP: string;
-    relationWithMe: string;
+    relationWithYou: string;
     expenseDate: Date;
 }

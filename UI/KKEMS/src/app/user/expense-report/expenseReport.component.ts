@@ -54,24 +54,23 @@ export class ExpenseReportComponent implements OnInit {
       this.httpService.getAsync(ApiConst.GetExpenseReport
         + "fromDate=" + fDate.toISOString() + "&toDate=" + tDate.toISOString()).then(data => {
           this.expenseReport = data;
+          console.log(this.expenseReport);
           let body = [];
           if (this.expenseReport != null) {
             for (var j = 0; j < this.expenseReport.length; j++) {
-              console.log(this.expenseReport.length);
-              console.log(this.expenseReport[j].expenseFor.toString());
               body.push([
                 this.expenseReport[j].expenseFor.toString(),
                 this.expenseReport[j].cost.toString(),
                 this.expenseReport[j].reasonOfExpense.toString(),
                 this.expenseReport[j].whatKindOfRelation_GROUP.toString(),
-                (this.expenseReport[j].relationWithMe == null) ? '' : this.expenseReport[j].relationWithMe.toString(),
-                this.expenseReport[j].expenseDate.toString()],
+                (this.expenseReport[j].relationWithYou == null) ? '' : this.expenseReport[j].relationWithYou.toString(),
+                new Date(this.expenseReport[j].expenseDate).toDateString().toString()],
               );
             }
+
+            var total = this.expenseReport.reduce((sum, el) => sum + el.cost, 0);
+            console.log(total);
           }
-
-
-          console.log(body);
           this.createPdf(body);
         })
     }
@@ -81,29 +80,41 @@ export class ExpenseReportComponent implements OnInit {
     var doc = new jsPDF('p', 'mm', 'a4');;
 
     doc.setFontSize(5);
-    doc.text('My PDF Table', 100, 80);
     doc.setFontSize(5);
     doc.setTextColor(100);
 
-    let head = ['expenseFor', 'cost', 'reasonOfExpense', 'whatKindOfRelation_GROUP', 'relationWithMe', 'expenseDate'];
+    let head = [['Expense For', 'Cost', 'Reason Of Expense', 'Relation Type', 'Rel. With Me', 'Expense Date']];
 
     (doc as any).autoTable({
       head: head,
       body: data,
-      theme: 'plain',
-      // didDrawCell: (data: { column: { index: any; }; }) => {
-      //   console.log(data.column.index)
-      // },
-      styles: { fillColor: [255, 0, 0] },
-      columnStyles: { 0: { halign: 'center', fillColor: [0, 255, 0] } }, // Cells in first column centered and green
-      margin: { top: 10 }
+      theme: 'grid',
+      margin: { top: 30 },
+      columnStyles: {
+        0: { cellWidth: 25 },
+        1: { cellWidth: 15 },
+        2: { cellWidth: 50 },
+        3: { cellWidth: 25 },
+        4: { cellWidth: 25 },
+        5: { cellWidth: 35 },
+        // etc
+      },
+      showHead: "everyPage",
+      didDrawPage: function (data: { settings: { margin: { left: number; }; }; }) {
+
+        // Header
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        doc.text("Expense Report", data.settings.margin.left, 22);
+      }
     })
 
     // Open PDF document in new tab
     doc.output('dataurlnewwindow')
 
+
     // Download PDF document  
-    doc.save('table.pdf');
+    doc.save('table_' + new Date().toString() + '.pdf');
   }
 
 }
