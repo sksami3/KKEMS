@@ -48,7 +48,7 @@ namespace KKEMS.Business.Services
 		                        AspNetUsers UR ON E.KithOrKinId = UR.Id LEFT JOIN
 		                        RelationshipUser RU ON E.KithOrKinId = RU.KithOrKinsId LEFT JOIN
 		                        Relationships R ON R.Id = RU.RelationshipsId LEFT JOIN
-		                        Groups G ON G.Id = R.GroupId LEFT JOIN
+		                        Groups G ON G.UserId = E.UserId LEFT JOIN
 		                        Groups MG ON MG.Id = E.GroupId
                             WHERE 
 								E.UserId = {userId}

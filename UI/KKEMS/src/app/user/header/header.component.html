@@ -8,11 +8,11 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <button mat-button routerLink="/User/kithorkin-list">Kith Or Kin List</button>
-      <button mat-button routerLink="/User/relationship-list">Relationshipas</button>
-      <button mat-button routerLink="/User/group-list">Groups</button>
-      <button mat-button routerLink="/User/expense-list">Expenses</button>
-      <button mat-button routerLink="/User/expense-report">Expenses Report</button>
+      <button mat-button routerLink="/User/kithorkin-list" routerLinkActive="mat-accent">Kith Or Kin List</button>
+      <button mat-button routerLink="/User/relationship-list" routerLinkActive="mat-accent">Relationshipas</button>
+      <button mat-button routerLink="/User/group-list" routerLinkActive="mat-accent">Groups</button>
+      <button mat-button routerLink="/User/expense-list" routerLinkActive="mat-accent">Expenses</button>
+      <button mat-button routerLink="/User/expense-report" routerLinkActive="mat-accent">Expenses Report</button>
       <button mat-button routerLink="">Dashboard</button>
       <button mat-button (click)="logout()">LogOut</button>
   </div>

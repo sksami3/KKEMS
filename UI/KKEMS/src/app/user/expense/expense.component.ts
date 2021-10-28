@@ -73,7 +73,8 @@ export class ExpenseComponent implements OnInit {
     }
 
     if (typeof (this.kinOrkiths) !== 'undefined') {
-      this.filteredOptions = this.expenseForm.valueChanges
+      
+      this.filteredOptions = this.expenseForm/*.get('kinOrKith')?*/.valueChanges
         .pipe(
           startWith(''),
           map(value => typeof value === 'string' ? value : value.name),
@@ -162,9 +163,9 @@ export class ExpenseComponent implements OnInit {
     return user && user.name ? user.name : '';
   }
 
-  private _filter(name: string): User[] {
-    const filterValue = name.toString().toLowerCase();
-
+  private _filter(name: any): User[] {
+    const filterValue = this.expenseForm.get("kinOrKith")?.value;//name.toString().toLowerCase();
+    console.log(name);
     return this.kinOrkiths.filter(option => option.name.toString().toLowerCase().includes(filterValue));
   }
 
@@ -177,6 +178,7 @@ export class ExpenseComponent implements OnInit {
 
       this.filteredOptions = this.expenseForm.valueChanges.pipe(
         startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
         map(value => this._filter(value))
       );
     })

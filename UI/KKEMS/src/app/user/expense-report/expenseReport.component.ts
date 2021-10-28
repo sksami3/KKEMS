@@ -79,6 +79,15 @@ export class ExpenseReportComponent implements OnInit {
       fDate.setDate(fDate.getDate() + 1);
       tDate.setDate(tDate.getDate() + 1);
 
+      if(typeof this.expense.groupId == 'undefined')
+      {
+        this.expense.groupId = 0;
+      }
+      if(typeof this.expense.kithOrKinId == 'undefined')
+      {
+        this.expense.kithOrKinId = 0;
+      }
+
       this.httpService.getAsync(ApiConst.GetExpenseReport
         + "fromDate=" + fDate.toISOString() 
         + "&toDate=" + tDate.toISOString()
@@ -185,7 +194,7 @@ export class ExpenseReportComponent implements OnInit {
   }
 
   private _filter(name: string): User[] {
-    const filterValue = name.toString().toLowerCase();
+    const filterValue = this.expenseReportForm.get("kinOrKith")?.value;//name.toString().toLowerCase();
 
     return this.kinOrkiths.filter(option => option.name.toString().toLowerCase().includes(filterValue));
   }
