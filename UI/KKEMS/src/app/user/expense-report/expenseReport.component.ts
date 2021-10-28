@@ -11,6 +11,13 @@ import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
 import jspdf, { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { Expense } from 'src/app/_model/expense';
+import { kk } from '../kk-dialog/kk-dialog.component';
+import { GroupDialogComponent } from '../group-dialog/group-dialog.component';
+import { Group } from 'src/app/_model/group';
+import { ModalPopupService } from 'src/app/_service/modalService';
+import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-expenseReport-report',
   templateUrl: './expenseReport.component.html',
@@ -23,6 +30,11 @@ export class ExpenseReportComponent implements OnInit {
   isEdit: boolean;
   id: number;
 
+  expense: Expense = new Expense();
+  kinOrkiths: User[];
+  kks: Array<kk>;
+  filteredOptions: Observable<User[]>;
+
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
@@ -30,14 +42,30 @@ export class ExpenseReportComponent implements OnInit {
     public dialog: MatDialog,
     private authService: AuthenticationService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalPopupService: ModalPopupService
   ) { }
 
   ngOnInit() {
     this.expenseReportForm = this.formBuilder.group({
       fromDate: [null, [Validators.required]],
-      toDate: [null, [Validators.required]]
+      toDate: [null, [Validators.required]],
+      kinOrKithOrGroup: [null],
+      groupName: [null],
+      kinOrKith: [null]
     });
+
+    this.getKinOrKith();
+
+    if (typeof (this.kinOrkiths) !== 'undefined') {
+      this.filteredOptions = this.expenseReportForm.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.name),
+          map(name => name ? this._filter(name) : this.kinOrkiths.slice())
+        );
+    }
+
   }
 
 
@@ -52,7 +80,11 @@ export class ExpenseReportComponent implements OnInit {
       tDate.setDate(tDate.getDate() + 1);
 
       this.httpService.getAsync(ApiConst.GetExpenseReport
-        + "fromDate=" + fDate.toISOString() + "&toDate=" + tDate.toISOString()).then(data => {
+        + "fromDate=" + fDate.toISOString() 
+        + "&toDate=" + tDate.toISOString()
+        + "&groupId=" + this.expense.groupId
+        + "&kithOrKinId=" + this.expense.kithOrKinId
+        ).then(data => {
           this.expenseReport = data;
           console.log(this.expenseReport);
           let body = [];
@@ -114,7 +146,73 @@ export class ExpenseReportComponent implements OnInit {
 
 
     // Download PDF document  
-    doc.save('table_' + new Date().toString() + '.pdf');
+    doc.save('expenseReport_' + new Date().toString() + '.pdf');
+  }
+  
+  calcel() {
+    this.dialog.closeAll();
   }
 
+  openGroupDialog() {
+    let groupDialog = this.dialog.open(GroupDialogComponent, {
+      width: '550px'
+    });
+    let group: Group = new Group();
+    this.modalPopupService.getCloseEvent().subscribe(($e) => {
+      group = new Group();
+      group.id = $e.id;
+      group.name = $e.name;
+
+      this.expense.groupId = group.id;
+      this.expenseReportForm.controls['groupName'].setValue(group.name);
+      this.expenseReportForm.controls.kinOrKith.setValue('');
+
+      this.expense.kithOrKinId = 0;
+
+      this.dialog.closeAll();
+    })
+
+
+  }
+
+  calcelGroup() {
+    this.dialog.closeAll();
+  }
+
+
+  displayFn(user: User): string {
+    return user && user.name ? user.name : '';
+  }
+
+  private _filter(name: string): User[] {
+    const filterValue = name.toString().toLowerCase();
+
+    return this.kinOrkiths.filter(option => option.name.toString().toLowerCase().includes(filterValue));
+  }
+
+  private getKinOrKith() {
+    let id = this.authService.userValue.id;
+
+    this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
+      this.kinOrkiths = data;
+      this.kks = this.kinOrkiths.map(o => { return { id: o.id, name: o.name } })
+
+      this.filteredOptions = this.expenseReportForm.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    })
+  }
+
+  public getSelectedKK(kkId: any) {
+    let result = this.kks.find(x => x.id == kkId);
+
+    this.expenseReportForm.controls.kinOrKith.setValue(result?.name);
+    this.expenseReportForm.controls.groupName.setValue('');
+
+    this.expense.groupId = 0;
+    this.expense.kithOrKinId = result?.id;
+
+    this.modalPopupService.emit(result);
+  }
 }

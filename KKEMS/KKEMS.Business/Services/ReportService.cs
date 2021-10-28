@@ -31,7 +31,7 @@ namespace KKEMS.Business.Services
             _repationshipRepository = repationshipRepository;
             _groupRepository = groupRepository;
         }
-        public async Task<List<ReportVM>> GetExpenseReport(DateTime fromDate, DateTime toDate, int userId)
+        public async Task<List<ReportVM>> GetExpenseReport(DateTime fromDate, DateTime toDate, int groupId, int kithOrKinId, int userId)
         {
             IEnumerable<ReportVM> reportVMs = new List<ReportVM>();
             string query = $@"SELECT 
@@ -52,7 +52,9 @@ namespace KKEMS.Business.Services
 		                        Groups MG ON MG.Id = E.GroupId
                             WHERE 
 								E.UserId = {userId}
-								AND E.ExpenseDate BETWEEN '{fromDate.ToLongDateString()}' AND '{toDate.ToLongDateString()}'";
+								AND E.ExpenseDate BETWEEN '{fromDate.ToLongDateString()}' AND '{toDate.ToLongDateString()}'
+                                AND ({groupId} = 0 OR G.Id = {groupId})
+                                AND ({kithOrKinId} = 0 OR E.KithOrKinId = {kithOrKinId})";
             
             using (IDbConnection dbConnection = new SqlConnection("Server=DESKTOP-SSR\\SQLEXPRESS;Database=KKEMS_DB;User Id=sa;password=sa1234;Trusted_Connection=False;MultipleActiveResultSets=true;"))
             {

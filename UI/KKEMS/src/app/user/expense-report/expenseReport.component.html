@@ -8,6 +8,41 @@
 <div fxLayout="column" fxFlex="66" fxFlexOffset="15" fxLayoutAlign="space-around stretch" [style.margin-top]="'5%'">
 
     <form [formGroup]="expenseReportForm" fxLayout="column">
+
+        <div [hidden] = "true">
+            <mat-form-field appearance="outline">
+                <mat-label> Group/Relationship
+                </mat-label>
+                <input matInput readonly [disabled]="true" formControlName="kinOrKithOrGroup" type="text"
+                    name="kinOrKithOrGroup" type="text">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label> Group
+                </mat-label>
+                <input matInput readonly [disabled]="true" formControlName="groupName" type="groupName" name="groupName"
+                    type="text">
+                <!-- <mat-error *ngIf="expenseForm.controls.groupName.touched && expenseForm.controls.groupName.invalid">
+                    <span *ngIf="expenseForm.controls.groupName.errors?.required">This field is mandatory.</span>
+                </mat-error> -->
+            </mat-form-field>
+            <button mat-button color="green" (click)="openGroupDialog()">+Group</button>
+        </div>
+
+        <div>
+            <mat-form-field required appearance="outline">
+                <mat-label>Kin Or Kith</mat-label>
+                <input type="text" matInput formControlName="kinOrKith" [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                    (optionSelected)="getSelectedKK($event.option.value)">
+                    <mat-option *ngFor="let kk of filteredOptions | async" [value]="kk.id">
+                        {{kk.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>From Date</mat-label>

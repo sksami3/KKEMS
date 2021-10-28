@@ -32,13 +32,13 @@ namespace KKEMS.WebApi.Controllers
         }
         [HttpGet]
         [Route("GetExpenseReport")]
-        public async Task<IActionResult> GetExpenseReport(DateTime FromDate, DateTime ToDate)
+        public async Task<IActionResult> GetExpenseReport(DateTime FromDate, DateTime ToDate, int groupId, int kithOrKinId)
         {
             int userId = 0;
             if (User != null)
                 userId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
 
-            var rpt = await _reportService.GetExpenseReport(FromDate, ToDate, userId);
+            var rpt = await _reportService.GetExpenseReport(FromDate, ToDate, groupId, kithOrKinId, userId);
             return Ok(rpt);
         }
     }

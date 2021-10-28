@@ -9,6 +9,6 @@ namespace KKEMS.Core.Interfaces.Services
 {
     public interface IReportService
     {
-        Task<List<ReportVM>> GetExpenseReport(DateTime fromDate, DateTime toDate, int userId);
+        Task<List<ReportVM>> GetExpenseReport(DateTime fromDate, DateTime toDate,int groupId, int kithOrKinId, int userId);
     }
 }
