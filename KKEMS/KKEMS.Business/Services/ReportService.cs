@@ -40,7 +40,7 @@ namespace KKEMS.Business.Services
             IEnumerable<ReportVM> reportVMs = new List<ReportVM>();
             string query = $@"SELECT 
 		                        U.UserName AS You,
-		                        ISNULL(UR.name,G.Name + ' (GROUP)') AS ExpenseFor,
+		                        ISNULL(UR.name,ISNULL(G.Name + ' (GROUP)', 'N/A')) AS ExpenseFor,
 		                        E.Cost,
 		                        E.Reason AS ReasonOfExpense,
 		                        ISNULL(G.Name,'') AS WhatKindOfRelation_GROUP,
@@ -59,10 +59,10 @@ namespace KKEMS.Business.Services
 								) R ON R.userId = U.Id AND R.KKId = E.KithOrKinId LEFT JOIN
 								(
 									SELECT UserId, Id, G.Name FROM Groups G
-								) G ON G.UserId = U.Id AND G.Id = R.GroupId
+								) G ON (G.UserId = U.Id AND G.Id = E.GroupId) OR (G.UserId = U.Id AND G.Id = R.GroupId)
                             WHERE 
 								E.UserId = {userId}
-								AND E.ExpenseDate BETWEEN '{fromDate.ToLongDateString()}' AND '{toDate.ToLongDateString()}'
+								AND CAST(E.ExpenseDate AS DATE) BETWEEN '{fromDate.ToLongDateString()}' AND '{toDate.ToLongDateString()}'
                                 AND ({groupId} = 0 OR G.Id = {groupId})
                                 AND ({kithOrKinId} = 0 OR E.KithOrKinId = {kithOrKinId})";
             
