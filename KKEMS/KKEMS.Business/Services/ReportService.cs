@@ -36,20 +36,26 @@ namespace KKEMS.Business.Services
             IEnumerable<ReportVM> reportVMs = new List<ReportVM>();
             string query = $@"SELECT 
 		                        U.UserName AS You,
-		                        ISNULL(UR.UserName,MG.Name + ' (GROUP)') AS ExpenseFor,
+		                        ISNULL(UR.name,G.Name + ' (GROUP)') AS ExpenseFor,
 		                        E.Cost,
 		                        E.Reason AS ReasonOfExpense,
-		                        ISNULL(G.Name,MG.Name) AS WhatKindOfRelation_GROUP,
-		                        ISNULL(R.Name,'GROUP') AS RelationWithYou,
+		                        ISNULL(G.Name,'') AS WhatKindOfRelation_GROUP,
+		                        ISNULL(R.RelationName,'GROUP') AS RelationWithYou,
 		                        E.ExpenseDate
 	                        FROM 
 		                        Expenses E INNER JOIN
 		                        AspNetUsers U ON E.UserId = U.Id LEFT JOIN 
 		                        AspNetUsers UR ON E.KithOrKinId = UR.Id LEFT JOIN
-		                        RelationshipUser RU ON E.KithOrKinId = RU.KithOrKinsId LEFT JOIN
-		                        Relationships R ON R.Id = RU.RelationshipsId LEFT JOIN
-		                        Groups G ON G.UserId = E.UserId LEFT JOIN
-		                        Groups MG ON MG.Id = E.GroupId
+								(
+									SELECT 
+										G.UserId userId, R.Name RelationName, R.Id RelationshipId, RU.KithOrKinsId KKId, R.GroupId 
+									FROM Relationships R 
+									INNER JOIN RelationshipUser RU ON R.Id = RU.RelationshipsId
+									INNER JOIN Groups G ON G.Id = R.GroupId
+								) R ON R.userId = U.Id AND R.KKId = E.KithOrKinId LEFT JOIN
+								(
+									SELECT UserId, Id, G.Name FROM Groups G
+								) G ON G.UserId = U.Id AND G.Id = R.GroupId
                             WHERE 
 								E.UserId = {userId}
 								AND E.ExpenseDate BETWEEN '{fromDate.ToLongDateString()}' AND '{toDate.ToLongDateString()}'
