@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace KKEMS.Business.Services
 {
@@ -20,16 +21,19 @@ namespace KKEMS.Business.Services
         private readonly IExpenseRepository _expenseRepository;
         private readonly IRelationshipRepository _repationshipRepository;
         private readonly IGroupRepository _groupRepository;
+        private IConfiguration _configuration;
         private UserManager<User> UserManager { get; }
 
         public ReportService(
             IExpenseRepository expenseRepository,
             IRelationshipRepository repationshipRepository,
-            IGroupRepository groupRepository)
+            IGroupRepository groupRepository,
+            IConfiguration configuration)
         {
             _expenseRepository = expenseRepository;
             _repationshipRepository = repationshipRepository;
             _groupRepository = groupRepository;
+            _configuration = configuration;
         }
         public async Task<List<ReportVM>> GetExpenseReport(DateTime fromDate, DateTime toDate, int groupId, int kithOrKinId, int userId)
         {
@@ -62,7 +66,7 @@ namespace KKEMS.Business.Services
                                 AND ({groupId} = 0 OR G.Id = {groupId})
                                 AND ({kithOrKinId} = 0 OR E.KithOrKinId = {kithOrKinId})";
             
-            using (IDbConnection dbConnection = new SqlConnection("Server=DESKTOP-SSR\\SQLEXPRESS;Database=KKEMS_DB;User Id=sa;password=sa1234;Trusted_Connection=False;MultipleActiveResultSets=true;"))
+            using (IDbConnection dbConnection = new SqlConnection(this._configuration.GetConnectionString("DefaultConnection")))
             {
                 dbConnection.Open();
                 try
