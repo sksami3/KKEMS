@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_model';
+import { AuthenticationService } from 'src/app/_service/authentication.service';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
 import { ApiConst } from 'src/app/_utility/ApiConst';
-import {UUID} from 'uuid-generator-ts';
+import { UUID } from 'uuid-generator-ts';
 
 @Component({
   selector: 'app-kithorkin',
@@ -18,12 +19,15 @@ export class KithorkinComponent implements OnInit {
 
   kinOrkithForm: FormGroup;
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  id: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
-    private router : Router,
-    private toastr: ToastrService
+    private router: Router,
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -32,6 +36,12 @@ export class KithorkinComponent implements OnInit {
       name: [null, [Validators.required]],
       phonenumber: [null, [Validators.nullValidator]]
     });
+
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (this.id !== 0 || (typeof this.id === "string" && this.id !== "")) {
+      this.getKKById(this.id);
+    }
   }
 
   submit() {
@@ -39,27 +49,41 @@ export class KithorkinComponent implements OnInit {
       const uuid = new UUID();
 
       this.user = this.kinOrkithForm.value;
-      this.user.PASSWORDHASH = 'kithOrkin123';
-      this.user.username = uuid.getDashFreeUUID().substring(0, 6);
-      this.user.isUsedForKinOrKith = true;
-      console.log(this.user);
       //update
-      if (this.user.id !== undefined || (typeof this.user.id === "string" && this.user.id !== "")) {
-        this.toastr.info('Updated Successfully!!', 'Congratulations...');
+      if (this.id !== undefined || (typeof this.id === "string" && this.id !== "")) {
+        this.user.id = this.id;
+        this.httpService.postAsync(ApiConst.updateKinOrKith, this.user).subscribe(data => {
+          this.toastr.info('Updated Successfully!!', 'Congratulations...');
+          this.router.navigate(["../User/kithorkin-list"]);
+        })
       }
       //insert
       else {
+        this.user.PASSWORDHASH = 'kithOrkin123';
+        this.user.username = uuid.getDashFreeUUID().substring(0, 6);
+        this.user.isUsedForKinOrKith = true;
+
         this.httpService.postAsync(ApiConst.postUser, this.user).subscribe(data => {
           this.toastr.success('Saved Successfully!!', 'Congratulations...');
           this.router.navigate(["../User/kithorkin-list"]);
         })
       }
-      
+
     }
   }
 
   // private setUserObject() : User{
   //   this.user.EMAIL = this.kinOrkithForm.get('email');
   // }
+
+  private getKKById(id: number) {
+    this.httpService.getAsync(ApiConst.getKinOrKithById + id).then(data => {
+      this.kinOrkithForm.controls.email.setValue(data[0].email);
+      this.kinOrkithForm.controls.name.setValue(data[0].name);
+      this.kinOrkithForm.controls.phonenumber.setValue(data[0].phonenumber);
+
+      console.log();
+    })
+  }
 
 }

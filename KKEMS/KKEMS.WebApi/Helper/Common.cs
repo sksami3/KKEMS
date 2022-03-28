@@ -1,8 +1,10 @@
 ﻿using KKEMS.Core.Entity;
 using KKEMS.Core.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
@@ -36,6 +38,18 @@ namespace KKEMS.WebApi.Helper
                 return true;
             }
             return false;
+        }
+    }
+
+    public class CommonControllerMethods : ControllerBase
+    {
+        public int GetLoggedUser(ClaimsPrincipal user)
+        {
+            int userId = 0;
+            if (user != null)
+                userId = Convert.ToInt32(user.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
+
+            return userId;
         }
     }
 }
