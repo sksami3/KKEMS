@@ -104,8 +104,8 @@ namespace KKEMS.Web.Controllers
         [HttpGet("GetAllKinOrKithByCreatedUserId/{id}")]
         public async Task<IActionResult> GetAllKinOrKithByCreatedUserId(int id)
         {
-            var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == id && x.isUsedForKinOrKith == true).ToListAsync();
-            return Ok(kinOrKith);
+            var kinOrKiths = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == id && x.isUsedForKinOrKith == true).ToListAsync();
+            return Ok(kinOrKiths);
         }
         [HttpPost("Delete/{userId}")]
         public async Task<IActionResult> Delete(int userId)
@@ -126,8 +126,7 @@ namespace KKEMS.Web.Controllers
         [HttpGet("GetKinOrKithByCreatedUserId/{id}")]
         public async Task<IActionResult> GetKinOrKithByCreatedUserId(int id)
         {
-            var userId = Common.GetLoggedUser(User);
-            var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == userId && x.isUsedForKinOrKith == true && x.Id == id).ToListAsync();
+            var kinOrKith = await _GetKinOrKithByCreatedUserId(id);
             return Ok(kinOrKith);
         }
 
@@ -142,14 +141,24 @@ namespace KKEMS.Web.Controllers
                 else
                     group.Image = filename;
             }*/
-            var _user = (User)await GetKinOrKithByCreatedUserId(user.Id);
+            var _user = await _GetKinOrKithByCreatedUserId(user.Id);
             _user.name = user.name;
             _user.PhoneNumber = user.PhoneNumber;
             _user.Email = user.Email;
 
             await UserManager.UpdateAsync(_user);
-            return Ok(user);
+            return Ok(_user);
         }
+
+        #region
+        private async Task<User> _GetKinOrKithByCreatedUserId(int id)
+        {
+            var userId = Common.GetLoggedUser(User);
+            var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == userId && x.isUsedForKinOrKith == true && x.Id == id).FirstOrDefaultAsync();
+
+            return kinOrKith;
+        }
+        #endregion
 
     }
 }

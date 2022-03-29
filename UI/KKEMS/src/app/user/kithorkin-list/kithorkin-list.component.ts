@@ -47,6 +47,7 @@ export class KithorkinListComponent implements OnInit, AfterViewInit {
     this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
       this.kithOrKins = data;
 
+      this.dataSource = this.kithOrKins;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     })

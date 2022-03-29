@@ -34,7 +34,7 @@ export class KithorkinComponent implements OnInit {
     this.kinOrkithForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
       name: [null, [Validators.required]],
-      phonenumber: [null, [Validators.nullValidator]]
+      phonenumber: [null]
     });
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -49,8 +49,10 @@ export class KithorkinComponent implements OnInit {
       const uuid = new UUID();
 
       this.user = this.kinOrkithForm.value;
+      console.log(this.user);
+      console.log(this.id);
       //update
-      if (this.id !== undefined || (typeof this.id === "string" && this.id !== "")) {
+      if (this.id !== undefined && typeof this.id === "string" && this.id !== "" && this.id !== 0) {
         this.user.id = this.id;
         this.httpService.postAsync(ApiConst.updateKinOrKith, this.user).subscribe(data => {
           this.toastr.info('Updated Successfully!!', 'Congratulations...');
@@ -78,11 +80,13 @@ export class KithorkinComponent implements OnInit {
 
   private getKKById(id: number) {
     this.httpService.getAsync(ApiConst.getKinOrKithById + id).then(data => {
-      this.kinOrkithForm.controls.email.setValue(data[0].email);
-      this.kinOrkithForm.controls.name.setValue(data[0].name);
-      this.kinOrkithForm.controls.phonenumber.setValue(data[0].phonenumber);
+      this.user = data;
 
-      console.log();
+      this.kinOrkithForm.controls.email.setValue(data.email);
+      this.kinOrkithForm.controls.name.setValue(data.name);
+      this.kinOrkithForm.controls.phonenumber.setValue(data.phoneNumber);
+
+      console.log(this.user);
     })
   }
 

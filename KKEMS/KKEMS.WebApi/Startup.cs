@@ -125,7 +125,7 @@ namespace KKEMS.WebApi
 
             var builder = new ConfigurationBuilder();
             var configuration = builder.Build();
-            ConnectionStringConfig.ConnectionString = configuration["Server=DESKTOP-SSR\\SQLEXPRESS;Database=KKEMS_DB;User Id=sa;password=sa1234;Trusted_Connection=False;MultipleActiveResultSets=true;"];
+            ConnectionStringConfig.ConnectionString = Configuration.GetConnectionString("DefaultConnection");//configuration["Server=DESKTOP-SSR\\SQLEXPRESS;Database=KKEMS_DB;User Id=sa;password=sa1234;Trusted_Connection=False;MultipleActiveResultSets=true;"];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
