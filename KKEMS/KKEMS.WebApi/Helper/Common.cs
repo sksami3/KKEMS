@@ -39,11 +39,8 @@ namespace KKEMS.WebApi.Helper
             }
             return false;
         }
-    }
 
-    public class CommonControllerMethods : ControllerBase
-    {
-        public int GetLoggedUser(ClaimsPrincipal user)
+        public static int GetLoggedUser(ClaimsPrincipal user)
         {
             int userId = 0;
             if (user != null)

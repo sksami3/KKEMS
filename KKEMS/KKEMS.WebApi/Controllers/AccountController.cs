@@ -22,7 +22,6 @@ namespace KKEMS.Web.Controllers
         public UserManager<User> UserManager { get; }
         public SignInManager<User> SignInManager { get; }
         private readonly ILogger<AccountController> _logger;
-        CommonControllerMethods _commonControllerMethods;
 
         public AccountController(UserManager<User> userManager,
             SignInManager<User> signInManager,
@@ -31,7 +30,6 @@ namespace KKEMS.Web.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
             _logger = logger;
-            _commonControllerMethods = new CommonControllerMethods();
         }
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
@@ -128,7 +126,7 @@ namespace KKEMS.Web.Controllers
         [HttpGet("GetKinOrKithByCreatedUserId/{id}")]
         public async Task<IActionResult> GetKinOrKithByCreatedUserId(int id)
         {
-            var userId = _commonControllerMethods.GetLoggedUser(User);
+            var userId = Common.GetLoggedUser(User);
             var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == userId && x.isUsedForKinOrKith == true && x.Id == id).ToListAsync();
             return Ok(kinOrKith);
         }
