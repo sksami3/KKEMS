@@ -22,6 +22,7 @@ namespace KKEMS.Web.Controllers
         public UserManager<User> UserManager { get; }
         public SignInManager<User> SignInManager { get; }
         private readonly ILogger<AccountController> _logger;
+        CommonControllerMethods _commonControllerMethods;
 
         public AccountController(UserManager<User> userManager,
             SignInManager<User> signInManager,
@@ -30,6 +31,7 @@ namespace KKEMS.Web.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
             _logger = logger;
+            _commonControllerMethods = new CommonControllerMethods();
         }
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
@@ -121,6 +123,34 @@ namespace KKEMS.Web.Controllers
             }
             
             return Ok();
+        }
+
+        [HttpGet("GetKinOrKithByCreatedUserId/{id}")]
+        public async Task<IActionResult> GetKinOrKithByCreatedUserId(int id)
+        {
+            var userId = _commonControllerMethods.GetLoggedUser(User);
+            var kinOrKith = await UserManager.Users.Where(x => x.CreatedByUserId != 0 && x.CreatedByUserId == userId && x.isUsedForKinOrKith == true && x.Id == id).ToListAsync();
+            return Ok(kinOrKith);
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> EditGroup(/*[FromForm]*/ User user)
+        {
+            /*if (group.ImageFile != null)
+            {
+                string filename = Helper.Helper.UploadSingleImage(Helper.Enums.FolderNameEnums.GroupImages.ToString(), group.ImageFile);
+                if (string.IsNullOrEmpty(filename))
+                    throw new GenericException(Exceptions.FileNotSaved);
+                else
+                    group.Image = filename;
+            }*/
+            var _user = (User)await GetKinOrKithByCreatedUserId(user.Id);
+            _user.name = user.name;
+            _user.PhoneNumber = user.PhoneNumber;
+            _user.Email = user.Email;
+
+            await UserManager.UpdateAsync(_user);
+            return Ok(user);
         }
 
     }

@@ -13,7 +13,9 @@ export class ApiConst {
      static baseUrl = ApiConst.BASE_URL;
      static getUsers = ApiConst.BASE_URL + '/api/Account/GetAllUsers';
      static getKinOrKith = ApiConst.BASE_URL + '/api/Account/GetAllKinOrKithByCreatedUserId/';
+     static getKinOrKithById = ApiConst.BASE_URL + '/api/Account/GetKinOrKithByCreatedUserId/';
      static deleteKinOrKith = ApiConst.BASE_URL + '/api/Account/Delete/';
+     static updateKinOrKith = ApiConst.BASE_URL + '/api/Account/Update';
      static postUser = ApiConst.BASE_URL + '/api/Account/Register';
      static postConfirmEmail = ApiConst.BASE_URL + '/api/Account/ConfirmEmail';
      static authenticate = ApiConst.BASE_URL + '/api/Account/Authenticate';
