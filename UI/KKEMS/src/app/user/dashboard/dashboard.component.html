@@ -21,26 +21,12 @@
 
 <fieldset>
     <legend style="color:slateblue;">Monthly Expense</legend>
-
-    <div fxLayout="row" fxLayoutAlign="space-around center">
         <!-- </div> -->
         <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="lineData">
-            <div style="display: block;" fxFlex="100">
-                <div class="options vertical">
-                    <span id="legendTitle">Monthly Expense</span>
-                    <igx-legend #legend orientation="horizontal"></igx-legend>
-                </div>
-                <div class="container">
-                    <igx-category-chart height="100%" width="100%" [dataSource]="lineData" [legend]="legend"
-                        chartType="line" yAxisTitle="Taka" yAxisTitleLeftMargin="100">
-                    </igx-category-chart>
-                </div>
-
-                
+            <div style="display: block;" fxFlex="40">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                </canvas>
             </div>
-
-
         </div>
-
-    </div>
 </fieldset>

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { IgxCategoryChartComponent, IgxLegendComponent } from 'igniteui-angular-charts';
 import { Color, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Statistics } from 'src/app/_model/statistics';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
@@ -14,19 +13,29 @@ import { ApiConst } from 'src/app/_utility/ApiConst';
 })
 export class DashboardComponent implements OnInit {
 
-  @ViewChild('chart') chart: IgxCategoryChartComponent;
-  @ViewChild('legend') legend: IgxLegendComponent;
-    
   // polar
   public group_pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  // bar
+  // polar
   public kithOrkin_polarChartOptions: ChartOptions = {
     responsive: true,
   };
 
   public lineData: any[];
+
+  // bar
+  barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  barChartLabels: Label[] = [];//['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  barChartData: ChartDataSets[] = [];
+  // [
+  //   { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
+  // ];
 
 
   public group_pieChartLabels: Label[];
@@ -46,7 +55,7 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) {
     this.getGroupExpense();
-    this. getKithOrKinExpense();
+    this.getKithOrKinExpense();
     this.GetMonthlyExpenseStatistics();
     //monkeyPatchChartJsTooltip();
     //monkeyPatchChartJsLegend();
@@ -81,7 +90,20 @@ export class DashboardComponent implements OnInit {
       let stat: Statistics[];
       stat = data;
       this.lineData = stat;
-      console.log(this.lineData);
+      console.log(data);
+      let labels = [];
+      let datas = [];
+      for (var i = 0; i < data.length; i++) {
+        labels.push(data[i].name); 
+        datas.push(data[i].total);
+      }
+
+      this.barChartLabels = labels;
+      console.log(labels);
+      this.barChartData =  [
+          { data: datas, label: 'Monthly Expense' }
+        ];
+
     })
   }
 

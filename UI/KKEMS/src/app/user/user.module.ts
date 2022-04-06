@@ -46,10 +46,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ChartsModule } from 'ng2-charts';
-import { 
-	IgxCategoryChartModule,
-	IgxLegendModule
- } from "igniteui-angular-charts";
 import { ExpenseReportComponent } from './expense-report/expenseReport.component';
 
 @NgModule({
@@ -111,9 +107,7 @@ import { ExpenseReportComponent } from './expense-report/expenseReport.component
     MatPaginatorModule,
     ToastrModule.forRoot(),
     ChartsModule,
-    HttpClientModule,
-    IgxCategoryChartModule,
-	  IgxLegendModule
+    HttpClientModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
