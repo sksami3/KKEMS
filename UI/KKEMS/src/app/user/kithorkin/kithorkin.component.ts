@@ -52,7 +52,7 @@ export class KithorkinComponent implements OnInit {
       console.log(this.user);
       console.log(this.id);
       //update
-      if (this.id !== undefined && typeof this.id === "string" && this.id !== "" && this.id !== 0) {
+      if (this.id !== undefined && this.id !== null && this.id !== 0) {
         this.user.id = this.id;
         this.httpService.postAsync(ApiConst.updateKinOrKith, this.user).subscribe(data => {
           this.toastr.info('Updated Successfully!!', 'Congratulations...');

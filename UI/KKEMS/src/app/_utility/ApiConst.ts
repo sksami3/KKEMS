@@ -2,7 +2,7 @@ import { environment } from "src/environments/environment";
 
 export class ApiConst {
     // Get BASE_URL from the configured environment, empty stirng used as fallback
-     private static BASE_URL  = /*"http://localhost:85"*/ environment.apiUrl || "";
+     private static BASE_URL  = /*"http://localhost:85";*/ environment.apiUrl || "";
 
     //  static getProducts = ApiConst.BASE_URL + '/api/Product/GetAll';
     //  static postProduct = ApiConst.BASE_URL + '/api/Product/Add';
