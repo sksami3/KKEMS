@@ -96,7 +96,7 @@ namespace KKEMS.Web.Controllers
                 }
                 #endregion
                 else
-                    return Content("User not found");
+                    return BadRequest("User not found");
             }
             else
                 return StatusCode(404);
