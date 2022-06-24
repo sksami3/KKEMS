@@ -48,14 +48,14 @@ export class ExpenseComponent implements OnInit {
     public dialog: MatDialog,
     private modalPopupService: ModalPopupService,
     private authService: AuthenticationService,
-    private router : Router,
+    private router: Router,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
 
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.getKinOrKith();
-
     this.expenseForm = this.formBuilder.group({
       kinOrKithOrGroup: [null],
       groupName: [null],
@@ -64,17 +64,13 @@ export class ExpenseComponent implements OnInit {
       reason: [null, [Validators.required]],
       expenseDate: [null]
     });
-
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-
     if (this.id !== 0 || (typeof this.id === "string" && this.id !== "")) {
       this.isEdit = true;
       this.getExpenseById(this.id);
     }
 
     if (typeof (this.kinOrkiths) !== 'undefined') {
-      
-      this.filteredOptions = this.expenseForm/*.get('kinOrKith')?*/.valueChanges
+      this.filteredOptions = this.expenseForm.valueChanges
         .pipe(
           startWith(''),
           map(value => typeof value === 'string' ? value : value.name),
@@ -82,12 +78,33 @@ export class ExpenseComponent implements OnInit {
         );
     }
   }
+  private getExpenseById(id: number) {
+    this.httpService.getAsync(ApiConst.getExpense + id).then(data => {
+      this.expense = data;
+      this.expenseForm.controls.cost.setValue(this.expense.cost);
+      this.expenseForm.controls.kinOrKithOrGroup.setValue(this.expense.kkOrGroupName);
+      this.expenseForm.controls.expenseDate.setValue(this.expense.expenseDate);
+      this.expenseForm.controls.reason.setValue(this.expense.reason);
+    })
+  }
 
+  private getKinOrKith() {
+    let id = this.authService.userValue.id;
 
+    this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
+      this.kinOrkiths = data;
+      this.kks = this.kinOrkiths.map(o => { return { id: o.id, name: o.name } })
+
+      this.filteredOptions = this.expenseForm.valueChanges.pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(value => this._filter(value))
+      );
+    })
+  }
   calcel() {
     this.dialog.closeAll();
   }
-
   openGroupDialog() {
     let groupDialog = this.dialog.open(GroupDialogComponent, {
       width: '550px'
@@ -100,16 +117,27 @@ export class ExpenseComponent implements OnInit {
 
       this.expense.groupId = group.id;
       this.expenseForm.controls['groupName'].setValue(group.name);
+      
+      this.expense.kithOrKinId = undefined;
       this.expenseForm.controls.kinOrKith.setValue('');
-
-      this.expense.kithOrKinId = 0;
-
+      
       this.dialog.closeAll();
     })
 
 
   }
+  public getSelectedKK(kkId: any) {
+    let result = this.kks.find(x => x.id == kkId);
 
+    this.expense.kithOrKinId = result?.id;
+    this.expenseForm.controls.kinOrKith.setValue(result?.name);
+
+    this.expense.groupId = undefined;
+    this.expenseForm.controls.groupName.setValue('');
+
+    this.modalPopupService.emit(result);
+  }
+  
   calcelGroup() {
     this.dialog.closeAll();
   }
@@ -139,24 +167,14 @@ export class ExpenseComponent implements OnInit {
           this.router.navigate(["../User/expense-list"]);
         })
       }
-      
+
     }
 
-    
+
   }
 
   edit(id: string) {
 
-  }
-
-  private getExpenseById(id: number) {
-    this.httpService.getAsync(ApiConst.getExpense + id).then(data => {
-      this.expense = data;
-      this.expenseForm.controls.cost.setValue(this.expense.cost);
-      this.expenseForm.controls.kinOrKithOrGroup.setValue(this.expense.kkOrGroupName);
-      this.expenseForm.controls.expenseDate.setValue(this.expense.expenseDate);
-      this.expenseForm.controls.reason.setValue(this.expense.reason);
-    })
   }
 
   displayFn(user: User): string {
@@ -165,35 +183,8 @@ export class ExpenseComponent implements OnInit {
 
   private _filter(name: any): User[] {
     const filterValue = this.expenseForm.get("kinOrKith")?.value;//name.toString().toLowerCase();
-    console.log(name);
+    //console.log(name);
     return this.kinOrkiths.filter(option => option.name.toString().toLowerCase().includes(filterValue));
-  }
-
-  private getKinOrKith() {
-    let id = this.authService.userValue.id;
-
-    this.httpService.getAsync(ApiConst.getKinOrKith + id).then(data => {
-      this.kinOrkiths = data;
-      this.kks = this.kinOrkiths.map(o => { return { id: o.id, name: o.name } })
-
-      this.filteredOptions = this.expenseForm.valueChanges.pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(value => this._filter(value))
-      );
-    })
-  }
-
-  public getSelectedKK(kkId: any) {
-    let result = this.kks.find(x => x.id == kkId);
-
-    this.expenseForm.controls.kinOrKith.setValue(result?.name);
-    this.expenseForm.controls.groupName.setValue('');
-
-    this.expense.groupId = 0;
-    this.expense.kithOrKinId = result?.id;
-
-    this.modalPopupService.emit(result);
   }
 }
 
