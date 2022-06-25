@@ -1,34 +1,33 @@
-<dic fxLayoutAlign="space-around center" fxLayout="column">
-    <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
 
-    <mat-divider style="width: 60%; display: inline-block;"></mat-divider>
-    <span style="padding: 20px; font-weight: 500;"></span>
-</dic>
 
-<form fxLayout="column" [formGroup]="loginForm">
-    <div class="input-row" fxLayout="column" [style.margin-top]="'10%'" fxLayoutGap.lt-md="0px"
-        fxLayoutAlign="space-around center">
+<div fxLayout="row" fxLayoutAlign="center center" class="login-main">
+    <mat-card>
+        <form fxLayout="column" [formGroup]="loginForm">
+            <div class="input-row" fxLayout="column" [style.margin-top]="'10%'" fxLayoutGap.lt-md="0px"
+                fxLayoutAlign="space-around center">
 
-        <mat-form-field required appearance="outline">
-            <mat-label> Username
-            </mat-label>
-            <input matInput formControlName="username" type="username">
-            <mat-error *ngIf="loginForm.controls.username.touched && loginForm.controls.username.invalid">
-                <span *ngIf="loginForm.controls.username.errors?.required">This field is mandatory.</span>
-            </mat-error>
-        </mat-form-field>
+                <mat-form-field required appearance="outline">
+                    <mat-label> Username
+                    </mat-label>
+                    <input matInput formControlName="username" type="username">
+                    <mat-error *ngIf="loginForm.controls.username.touched && loginForm.controls.username.invalid">
+                        <span *ngIf="loginForm.controls.username.errors?.required">This field is mandatory.</span>
+                    </mat-error>
+                </mat-form-field>
 
-        <mat-form-field required appearance="outline">
-            <mat-label> Password
-            </mat-label>
-            <input matInput formControlName="passwordhash" type="password">
-            <mat-error *ngIf="loginForm.controls.passwordhash.touched && loginForm.controls.passwordhash.invalid">
-                <span *ngIf="loginForm.controls.passwordhash.errors?.required">This field is mandatory.</span>
-            </mat-error>
-        </mat-form-field>
+                <mat-form-field required appearance="outline">
+                    <mat-label> Password
+                    </mat-label>
+                    <input matInput formControlName="passwordhash" type="password">
+                    <mat-error
+                        *ngIf="loginForm.controls.passwordhash.touched && loginForm.controls.passwordhash.invalid">
+                        <span *ngIf="loginForm.controls.passwordhash.errors?.required">This field is mandatory.</span>
+                    </mat-error>
+                </mat-form-field>
 
-        <button [disabled]="!loginForm.valid" mat-raised-button color="primary" (click)="submit()">Login</button>
-    </div>
-</form>
+                <button [disabled]="!loginForm.valid" mat-raised-button color="primary"
+                    (click)="submit()">Login</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
