@@ -1,5 +1,3 @@
-
-
 <div fxLayout="row" fxLayoutAlign="center center" class="login-main">
     <mat-card>
         <form fxLayout="column" [formGroup]="loginForm">
@@ -27,6 +25,8 @@
 
                 <button [disabled]="!loginForm.valid" mat-raised-button color="primary"
                     (click)="submit()">Login</button>
+
+                <a routerLink="/Auth/register">Register</a>
             </div>
         </form>
     </mat-card>

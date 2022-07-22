@@ -42,7 +42,7 @@ namespace KKEMS.Web.Controllers
         {
             if (registerVM != null)
             {
-                if(registerVM.isUsedForKinOrKith)
+                if (registerVM.isUsedForKinOrKith)
                     registerVM.CreatedByUserId = Convert.ToInt32(User.FindAll(ClaimTypes.NameIdentifier)?.Last().Value);
 
                 var result = await UserManager.CreateAsync(registerVM, registerVM.PasswordHash);
@@ -60,7 +60,11 @@ namespace KKEMS.Web.Controllers
                 //    //result.Errors;
                 //    return false;
                 #endregion
-                return Ok(result);
+
+                if (result.Succeeded)
+                    return Ok(result);
+                else
+                    return BadRequest("Error!! Unable to register."); ;
             }
             return StatusCode(404);
         }
@@ -115,11 +119,11 @@ namespace KKEMS.Web.Controllers
                 var user = await UserManager.FindByIdAsync(userId.ToString());
                 await UserManager.DeleteAsync(user);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-            
+
             return Ok();
         }
 
