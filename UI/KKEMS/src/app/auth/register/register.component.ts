@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { min } from 'rxjs/operators';
 import { User } from 'src/app/_model/user';
 import { HttpClientService } from 'src/app/_service/httpClient.service';
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
-    private router : Router
+    private router : Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class RegisterComponent implements OnInit {
       else {
         this.httpService.postAsync(ApiConst.postUser, this.user).subscribe(data => {
           // this.router.navigate(["/product-list"]);
-          console.log('saved');
+          this.toastr.success('Registration Done', 'Success!!!');
         })
       }
       this.router.navigate(["../User/login"]);
